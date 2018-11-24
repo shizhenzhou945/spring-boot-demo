@@ -3,10 +3,12 @@ buildscript {
         springBootVersion = '2.1.0.RELEASE'
     }
     repositories {
+        maven{ url "https://plugins.gradle.org/m2/" }
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+//        classpath "gradle.plugin.io.github.divinespear:jpa-schema-gradle-plugin:0.3.5.1"
     }
 }
 
@@ -16,6 +18,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+//apply plugin: "io.github.divinespear.jpa-schema-generate"
 
 group = 'com.github.wenslo'
 version = '0.0.1-SNAPSHOT'
@@ -24,11 +27,20 @@ sourceCompatibility = 1.8
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url "https://repo.spring.io/milestone" }
-    maven { url "https://plugins.gradle.org/m2/" }
     mavenCentral()
 }
 
-
+//generateSchema {
+//    vendor = "hibernate"
+//    databaseAction = "drop-and-create"
+//    scriptAction = "drop-and-create"
+//    packageToScan = [project.group]
+//    jdbcDriver = "org.h2.Driver"
+//    jdbcUrl = "jdbc:h2:file:~/h2/spring-boot-demo"
+//    jdbcUser = "sa"
+//    jdbcPassword = ""
+//    properties = ["hibernate.dialect":"org.hibernate.dialect.H2Dialect"]
+//}
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -36,5 +48,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     runtimeOnly('com.h2database:h2')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testCompile group: 'com.github.springtestdbunit', name: 'spring-test-dbunit', version: '1.3.0'
+
 //    testImplementation('org.springframework.security:spring-security-test')
 }

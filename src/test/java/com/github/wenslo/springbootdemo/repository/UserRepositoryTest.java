@@ -5,6 +5,8 @@ import com.github.wenslo.springbootdemo.model.User;
 import com.github.wenslo.springbootdemo.reposiroty.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -16,12 +18,14 @@ import java.util.List;
  * @description
  */
 public class UserRepositoryTest extends SpringBootDemoApplicationTests {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserRepository userRepository;
 
     @Test
     public void testFindAll() {
         List<User> list = userRepository.findAll();
+        logger.debug("list is {}",list);
         Assert.assertTrue(!list.isEmpty());
     }
 }
