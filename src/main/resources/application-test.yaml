@@ -4,8 +4,6 @@ spring:
     driver-class-name: org.h2.Driver
     data-username: sa
     password:
-  #    schema: classpath:db/schema.sql
-  #    data: classpath:db/data.sql
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
