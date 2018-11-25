@@ -20,8 +20,6 @@ public class TestController {
 
     @RequestMapping("/getAll")
     public Response getAll() {
-        Response response = new Response();
-        response.setOb(userService.getAll());
-        return response;
+        return Response.success(userService.getAll());
     }
 }
