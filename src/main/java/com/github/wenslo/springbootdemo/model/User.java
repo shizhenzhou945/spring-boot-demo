@@ -1,8 +1,6 @@
 package com.github.wenslo.springbootdemo.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
 /**
  * @author wenhailin
@@ -11,17 +9,16 @@ import javax.persistence.GenerationType;
  * @description
  */
 @Entity
-public class User {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseIdEntity{
     private String username;
     private String password;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

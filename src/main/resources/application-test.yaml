@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:file:~/h2/spring-boot-demo
+    url: jdbc:h2:file:~/h2/spring-boot-demo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     data-username: sa
     password:
@@ -13,6 +13,7 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
+
   h2:
     console:
       settings:
