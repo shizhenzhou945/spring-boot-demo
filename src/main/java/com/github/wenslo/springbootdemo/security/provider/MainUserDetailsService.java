@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.security;
+package com.github.wenslo.springbootdemo.security.provider;
 
 import com.github.wenslo.springbootdemo.reposiroty.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

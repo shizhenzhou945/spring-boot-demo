@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.security;
+package com.github.wenslo.springbootdemo.security.provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.security;
+package com.github.wenslo.springbootdemo.security.provider;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;

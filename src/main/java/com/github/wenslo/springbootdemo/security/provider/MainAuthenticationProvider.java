@@ -1,5 +1,6 @@
-package com.github.wenslo.springbootdemo.security;
+package com.github.wenslo.springbootdemo.security.provider;
 
+import com.github.wenslo.springbootdemo.domain.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,6 @@ public class MainAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        logger.info("The customize authenticate is invoked");
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -42,14 +42,13 @@ public class MainAuthenticationProvider implements AuthenticationProvider {
             token.setDetails(userDetails);
             return token;
         }
-        throw new UsernameNotFoundException("用户民或密码不存在，请重新输入后重试！");
+        throw new UsernameNotFoundException(Response.LOGIN_FAIL_MSG);
 
 
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        logger.info("The customize supports is invoked");
         return (UsernamePasswordAuthenticationToken.class
                 .isAssignableFrom(authentication));
     }

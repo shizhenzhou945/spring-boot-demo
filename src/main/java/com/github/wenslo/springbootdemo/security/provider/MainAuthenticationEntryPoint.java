@@ -1,6 +1,8 @@
-package com.github.wenslo.springbootdemo.security;
+package com.github.wenslo.springbootdemo.security.provider;
 
-import org.springframework.http.HttpStatus;
+import com.github.wenslo.springbootdemo.domain.Response;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -19,12 +21,15 @@ import java.io.PrintWriter;
  */
 @Component
 public class MainAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Autowired
+    private Gson gson;
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
-        writer.append("{\"code\":").append(String.valueOf(HttpStatus.UNAUTHORIZED.value())).append(",\"msg\":\"未授权\"}");
+        writer.append(gson.toJson(Response.UNAUTHORIZED));
         writer.flush();
     }
 }

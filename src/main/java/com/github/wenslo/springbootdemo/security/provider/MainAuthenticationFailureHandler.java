@@ -1,5 +1,6 @@
-package com.github.wenslo.springbootdemo.security;
+package com.github.wenslo.springbootdemo.security.provider;
 
+import com.github.wenslo.springbootdemo.domain.Response;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +36,9 @@ public class MainAuthenticationFailureHandler implements AuthenticationFailureHa
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
         if (!StringUtils.isEmpty(exception.getMessage())) {
-            writer.append("{\"code\":").append(String.valueOf(HttpStatus.OK.value())).append(",\"msg\":\"").append(exception.getMessage()).append("\"}");
+            writer.append(gson.toJson(new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage())));
         } else {
-            writer.append("{\"code\":").append(String.valueOf(HttpStatus.OK.value())).append(",\"msg\":\"登录失败\"}");
+            writer.append(gson.toJson(Response.LOGIN_FAIL));
         }
         writer.flush();
         writer.close();

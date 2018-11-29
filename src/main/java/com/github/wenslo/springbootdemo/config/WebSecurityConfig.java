@@ -1,10 +1,13 @@
 package com.github.wenslo.springbootdemo.config;
 
-import com.github.wenslo.springbootdemo.security.*;
+import com.github.wenslo.springbootdemo.security.filter.CustomAuthenticationFilter;
+import com.github.wenslo.springbootdemo.security.provider.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author wenhailin
@@ -34,11 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login_page")
-                .successHandler(mainAuthenticationSuccessHandler)
-                .failureHandler(mainAuthenticationFailureHandler)
-                .loginProcessingUrl("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
+//                .successHandler(mainAuthenticationSuccessHandler)
+//                .failureHandler(mainAuthenticationFailureHandler)
+//                .loginProcessingUrl("/login")
                 .permitAll()
                 .and()
                 .logout()
@@ -52,5 +53,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(mainAuthenticationEntryPoint)
 
         ;
+        http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean
+    public CustomAuthenticationFilter customAuthenticationFilter() throws Exception {
+        CustomAuthenticationFilter filter = new CustomAuthenticationFilter();
+        filter.setAuthenticationSuccessHandler(mainAuthenticationSuccessHandler);
+        filter.setAuthenticationFailureHandler(mainAuthenticationFailureHandler);
+        filter.setFilterProcessesUrl("/login");
+        filter.setAuthenticationManager(super.authenticationManagerBean());
+        return filter;
     }
 }

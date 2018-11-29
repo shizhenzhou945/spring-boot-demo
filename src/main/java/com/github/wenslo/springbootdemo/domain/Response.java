@@ -1,8 +1,11 @@
 package com.github.wenslo.springbootdemo.domain;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
+
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.OK;
 
 /**
  * @author wenhailin
@@ -10,20 +13,12 @@ import java.io.Serializable;
  * @createTime 2018年11月24日 下午4:04
  * @description
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response implements Serializable {
-    private static final int SUCCESS_CODE = 200;
-    private static final int ERROR_CODE = 500;
-    private static final int UNAUTHORIZED_CODE = 401;
-    private static final String SUCCESS_MSG = "成功";
-    private static final String ERROR_MSG = "失败";
-    private static final String UNAUTHORIZED_MSG = "未授权";
-    private static final long serialVersionUID = -5469984823575289643L;
     private int code;
     private String msg;
     private Object data;
 
-    private Response(int code, String msg) {
+    public Response(int code, String msg) {
         this(code, msg, null);
     }
 
@@ -34,18 +29,19 @@ public class Response implements Serializable {
         this.data = data;
     }
 
-    /** 操作成功 **/
-    public static final Response SUCCESS = new Response(SUCCESS_CODE, SUCCESS_MSG);
-    /** 操作失败 **/
-    public static final Response ERROR = new Response(ERROR_CODE, ERROR_MSG);
-    public static final Response UNAUTHORIZED = new Response(UNAUTHORIZED_CODE, UNAUTHORIZED_MSG);
+    public static final String LOGIN_FAIL_MSG = "username or password is error,try again please";
+
+    public static final Response SUCCESS = new Response(OK.value(), OK.getReasonPhrase());
+    public static final Response ERROR = new Response(INTERNAL_SERVER_ERROR.value(), INTERNAL_SERVER_ERROR.getReasonPhrase());
+    public static final Response UNAUTHORIZED = new Response(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+    public static final Response LOGIN_FAIL = new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), LOGIN_FAIL_MSG);
 
     public static Response success(Object data) {
-        return new Response(SUCCESS_CODE, SUCCESS_MSG, data);
+        return new Response(OK.value(), OK.getReasonPhrase(), data);
     }
 
     public static Response error(String msg) {
-        return new Response(ERROR_CODE, msg);
+        return new Response(INTERNAL_SERVER_ERROR.value(), msg);
     }
 
     public static Response error(int code, String msg) {
