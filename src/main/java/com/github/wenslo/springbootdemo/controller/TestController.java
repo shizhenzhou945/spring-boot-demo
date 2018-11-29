@@ -18,6 +18,7 @@ public class TestController {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping("/getAll")
     public Response getAll() {
         return Response.success(userService.getAll());

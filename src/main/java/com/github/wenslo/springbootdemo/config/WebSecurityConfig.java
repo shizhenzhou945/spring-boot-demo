@@ -1,12 +1,10 @@
 package com.github.wenslo.springbootdemo.config;
 
-import org.springframework.context.annotation.Bean;
+import com.github.wenslo.springbootdemo.security.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * @author wenhailin
@@ -16,22 +14,43 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withDefaultPasswordEncoder().username("user1").password("1234").roles("SUPER_MAN").build());
-        manager.createUser(User.withDefaultPasswordEncoder().username("user2").password("1234").roles("ADMIN").build());
-        return manager;
-    }
+
+    @Autowired
+    private MainAuthenticationProvider mainAuthenticationProvider;
+    @Autowired
+    private MainAuthenticationEntryPoint mainAuthenticationEntryPoint;
+    @Autowired
+    private MainAuthenticationSuccessHandler mainAuthenticationSuccessHandler;
+    @Autowired
+    private MainAuthenticationFailureHandler mainAuthenticationFailureHandler;
+    @Autowired
+    private MainLogoutSuccessHandler mainLogoutSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/test/**").access("hasRole('ADMIN') and hasRole('DBA')")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login_page")
+                .successHandler(mainAuthenticationSuccessHandler)
+                .failureHandler(mainAuthenticationFailureHandler)
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .logoutSuccessHandler(mainLogoutSuccessHandler)
+                .and()
+                .csrf()
+                .disable()
+                .authenticationProvider(mainAuthenticationProvider)
+                .exceptionHandling()
+                .authenticationEntryPoint(mainAuthenticationEntryPoint)
+
         ;
     }
 }

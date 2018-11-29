@@ -2,8 +2,10 @@ package com.github.wenslo.springbootdemo.repository;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.domain.Response;
 import com.github.wenslo.springbootdemo.model.User;
 import com.github.wenslo.springbootdemo.reposiroty.UserRepository;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class UserRepositoryTest extends BaseTestCase {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private Gson gson;
 
     @Test
     public void testFindAll() {
@@ -31,4 +35,8 @@ public class UserRepositoryTest extends BaseTestCase {
         Assert.assertTrue(!list.isEmpty());
     }
 
+    @Test
+    public void testResponse2Json() {
+        logger.info("response is {}", gson.toJson(Response.SUCCESS));
+    }
 }

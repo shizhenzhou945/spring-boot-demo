@@ -14,8 +14,11 @@ import java.io.Serializable;
 public class Response implements Serializable {
     private static final int SUCCESS_CODE = 200;
     private static final int ERROR_CODE = 500;
+    private static final int UNAUTHORIZED_CODE = 401;
     private static final String SUCCESS_MSG = "成功";
     private static final String ERROR_MSG = "失败";
+    private static final String UNAUTHORIZED_MSG = "未授权";
+    private static final long serialVersionUID = -5469984823575289643L;
     private int code;
     private String msg;
     private Object data;
@@ -31,10 +34,12 @@ public class Response implements Serializable {
         this.data = data;
     }
 
-    /**操作成功**/
+    /** 操作成功 **/
     public static final Response SUCCESS = new Response(SUCCESS_CODE, SUCCESS_MSG);
-    /**操作失败**/
+    /** 操作失败 **/
     public static final Response ERROR = new Response(ERROR_CODE, ERROR_MSG);
+    public static final Response UNAUTHORIZED = new Response(UNAUTHORIZED_CODE, UNAUTHORIZED_MSG);
+
     public static Response success(Object data) {
         return new Response(SUCCESS_CODE, SUCCESS_MSG, data);
     }
