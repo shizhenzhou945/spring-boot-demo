@@ -1,12 +1,12 @@
 package com.github.wenslo.springbootdemo.controller;
 
 import com.github.wenslo.springbootdemo.domain.Response;
-import com.github.wenslo.springbootdemo.security.SecurityUtil;
 import com.github.wenslo.springbootdemo.service.UserService;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,18 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/test")
-public class TestController {
+public class PermissionTestController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private Gson gson;
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/role")
+    public Response role() {
+        return Response.success(userService.getAll());
+    }
 
-    @RequestMapping("/getAll")
-    public Response getAll() {
-        Object loginUser = SecurityUtil.getLoginUser();
-        logger.info("loginUser is {}", gson.toJson(loginUser));
+    @PreAuthorize("hasPermission('MANAGER')")
+    @RequestMapping("/permission")
+    public Response permission() {
+        return Response.success(userService.getAll());
+    }
+
+
+    @RequestMapping("/noPermission")
+    public Response noPermission() {
         return Response.success(userService.getAll());
     }
 }
