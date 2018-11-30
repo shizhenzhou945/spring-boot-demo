@@ -29,12 +29,16 @@ public class Response implements Serializable {
         this.data = data;
     }
 
-    public static final String LOGIN_FAIL_MSG = "username or password is error,try again please";
+    public static final String LOGIN_FAIL_MSG = "Username or password is error,try again please";
+    public static final String LOGIN_SUCCESS_MSG = "Login success ";
+    public static final String LOGOUT_SUCCESS_MSG = "Logout success ";
 
     public static final Response SUCCESS = new Response(OK.value(), OK.getReasonPhrase());
     public static final Response ERROR = new Response(INTERNAL_SERVER_ERROR.value(), INTERNAL_SERVER_ERROR.getReasonPhrase());
     public static final Response UNAUTHORIZED = new Response(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
     public static final Response LOGIN_FAIL = new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), LOGIN_FAIL_MSG);
+    public static final Response LOGIN_SUCCESS = new Response(HttpStatus.OK.value(), LOGIN_SUCCESS_MSG);
+    public static final Response LOGOUT_SUCCESS = new Response(HttpStatus.OK.value(), LOGOUT_SUCCESS_MSG);
 
     public static Response success(Object data) {
         return new Response(OK.value(), OK.getReasonPhrase(), data);

@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @author wenhailin
  * @version 0.0.1
  * @createTime 2018年11月24日 下午4:24
- * @description
+ * @description 安全配置类
  */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -32,19 +32,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .anyRequest().permitAll()
+                .cors()
+                .and()
+                .antMatcher("/**").authorizeRequests()
+                .antMatchers("/login**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login_page")
-//                .successHandler(mainAuthenticationSuccessHandler)
-//                .failureHandler(mainAuthenticationFailureHandler)
-//                .loginProcessingUrl("/login")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll()
                 .logoutSuccessHandler(mainLogoutSuccessHandler)
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
                 .and()
                 .csrf()
                 .disable()
@@ -62,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationSuccessHandler(mainAuthenticationSuccessHandler);
         filter.setAuthenticationFailureHandler(mainAuthenticationFailureHandler);
         filter.setFilterProcessesUrl("/login");
-        filter.setAuthenticationManager(super.authenticationManagerBean());
+        filter.setAuthenticationManager(authenticationManagerBean());
         return filter;
     }
 }

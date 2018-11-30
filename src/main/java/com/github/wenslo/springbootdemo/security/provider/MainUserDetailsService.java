@@ -1,16 +1,13 @@
 package com.github.wenslo.springbootdemo.security.provider;
 
+import com.github.wenslo.springbootdemo.model.User;
 import com.github.wenslo.springbootdemo.reposiroty.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,11 +25,12 @@ public class MainUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<GrantedAuthority> roles = new ArrayList<>();
-        com.github.wenslo.springbootdemo.model.User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {
             return null;
         }
-        return new User(user.getUsername(), user.getPassword(), roles);
+//        List<GrantedAuthority> roles = user.getRoles().stream().map(Role::getRoleName).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
+        return user;
     }
 }

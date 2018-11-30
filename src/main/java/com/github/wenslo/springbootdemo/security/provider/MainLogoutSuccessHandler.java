@@ -1,6 +1,8 @@
 package com.github.wenslo.springbootdemo.security.provider;
 
-import org.springframework.http.HttpStatus;
+import com.github.wenslo.springbootdemo.domain.Response;
+import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -19,12 +21,15 @@ import java.io.PrintWriter;
  */
 @Component
 public class MainLogoutSuccessHandler implements LogoutSuccessHandler {
+    @Autowired
+    private Gson gson;
+
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
-        writer.append("{\"code\":").append(String.valueOf(HttpStatus.OK.value())).append(",\"msg\":\"登出成功\"}");
+        writer.append(gson.toJson(Response.LOGOUT_SUCCESS));
         writer.flush();
         writer.close();
     }

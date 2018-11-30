@@ -1,6 +1,7 @@
 package com.github.wenslo.springbootdemo.security.provider;
 
 import com.github.wenslo.springbootdemo.domain.Response;
+import com.github.wenslo.springbootdemo.security.token.CustomAuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class MainAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-        if (Objects.nonNull(userDetails) && Objects.equals(userDetails.getPassword(), password)) {
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
+        if (Objects.equals(userDetails.getPassword(), password)) {
+            CustomAuthenticationToken token = new CustomAuthenticationToken(username, password, userDetails.getAuthorities());
             token.setDetails(userDetails);
             return token;
         }
