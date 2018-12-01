@@ -153,9 +153,16 @@ public class User extends BaseIdEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (roles.isEmpty()) {
-            return Lists.newArrayList();
+        List<String> authorities = Lists.newArrayList();
+        if (!permission.isEmpty()) {
+            authorities.addAll(permission);
         }
-        return roles.stream().map(Role::getRoleName).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        if (!roles.isEmpty()) {
+            roles.forEach(it -> {
+                authorities.addAll(it.getPermission());
+                authorities.add(it.getRoleName());
+            });
+        }
+        return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 }

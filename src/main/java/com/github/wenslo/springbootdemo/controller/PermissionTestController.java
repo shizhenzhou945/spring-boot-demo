@@ -31,7 +31,7 @@ public class PermissionTestController {
         return Response.success(userService.getAll());
     }
 
-    @PreAuthorize("hasPermission('MANAGER')")
+    @PreAuthorize("hasAuthority('MANAGER')")
     @RequestMapping("/permission")
     public Response permission() {
         return Response.success(userService.getAll());

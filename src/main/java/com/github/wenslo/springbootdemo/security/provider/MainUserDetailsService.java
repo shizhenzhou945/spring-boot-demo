@@ -29,6 +29,7 @@ public class MainUserDetailsService implements UserDetailsService {
         if (Objects.isNull(user)) {
             return null;
         }
+
 //        List<GrantedAuthority> roles = user.getRoles().stream().map(Role::getRoleName).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 //        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
         return user;
