@@ -10,8 +10,10 @@ import org.springframework.security.core.Authentication;
  * @author wenhailin
  * @version 0.0.1
  * @createTime 2018年12月01日 下午6:10
- * @description 修改方法权限处理
+ * @description modify method security handle
+ * @deprecated useed not null
  */
+@Deprecated
 public class CustomMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressionHandler {
 
     @Override

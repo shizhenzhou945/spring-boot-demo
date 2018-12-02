@@ -160,7 +160,7 @@ public class User extends BaseIdEntity implements UserDetails {
         if (!roles.isEmpty()) {
             roles.forEach(it -> {
                 authorities.addAll(it.getPermission());
-                authorities.add(it.getRoleName());
+//                authorities.add(it.getRoleName());
             });
         }
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());

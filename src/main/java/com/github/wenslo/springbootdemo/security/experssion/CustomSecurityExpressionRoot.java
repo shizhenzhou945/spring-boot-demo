@@ -21,8 +21,9 @@ import java.util.Set;
  * @author wenhailin
  * @version 0.0.1
  * @createTime 2018年12月01日 下午5:52
- * @description 自定义方法验证条件
+ * @description custom method authorize annotation handler, like hasAuthorize , hasRole ...
  */
+@Deprecated
 public class CustomSecurityExpressionRoot implements MethodSecurityExpressionOperations, SecurityExpressionOperations {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private Object filterObject;

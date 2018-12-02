@@ -7,6 +7,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +21,7 @@ public class StringListConverter implements AttributeConverter<List<String>, Str
 
     @Override
     public String convertToDatabaseColumn(List<String> attribute) {
-        if (!attribute.isEmpty()) {
+        if (Objects.nonNull(attribute) && !attribute.isEmpty()) {
             return attribute.stream().collect(Collectors.joining(","));
         }
         return null;
