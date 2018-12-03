@@ -49,12 +49,12 @@ public class Pageable implements org.springframework.data.domain.Pageable, Seria
 
     @Override
     public Sort getSort() {
-        return sort;
+        return Objects.isNull(sort) ? Sort.by("id") : sort;
     }
 
     @Override
     public Sort getSortOr(Sort sort) {
-        return sortOr;
+        return Objects.isNull(sortOr) ? Sort.by("id") : sortOr;
     }
 
     public Pageable() {

@@ -2,13 +2,16 @@ package com.github.wenslo.springbootdemo.reposiroty;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.model.QUser;
 import com.github.wenslo.springbootdemo.model.User;
 import com.google.gson.Gson;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author wenhailin
@@ -39,4 +42,15 @@ public class UserRepositoryTest extends BaseTestCase {
         Assert.assertNotNull(user);
         logger.info("username is {} , findByUsername result is {}", gson.toJson(user));
     }
+
+    @Test
+    public void testQuerydsl() {
+        String username = "user1";
+        QUser user = QUser.user;
+        BooleanExpression booleanExpression = user.username.startsWith(username);
+        Optional one = userRepository.findOne(booleanExpression);
+        Assert.assertTrue(one.isPresent());
+        logger.info("one is {}", gson.toJson(one.get()));
+    }
+
 }

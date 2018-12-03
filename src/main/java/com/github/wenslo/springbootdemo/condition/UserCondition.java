@@ -8,6 +8,7 @@ package com.github.wenslo.springbootdemo.condition;
  */
 public class UserCondition extends BaseCondition {
     private String username;
+    private Boolean enabled;
 
     public String getUsername() {
         return username;
@@ -15,5 +16,13 @@ public class UserCondition extends BaseCondition {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

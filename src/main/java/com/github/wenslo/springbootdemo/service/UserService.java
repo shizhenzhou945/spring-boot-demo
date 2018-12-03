@@ -1,18 +1,20 @@
 package com.github.wenslo.springbootdemo.service;
 
 import com.github.wenslo.springbootdemo.condition.UserCondition;
+import com.github.wenslo.springbootdemo.model.QUser;
 import com.github.wenslo.springbootdemo.model.User;
 import com.github.wenslo.springbootdemo.reposiroty.UserRepository;
-import org.modelmapper.ModelMapper;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author wenhailin
@@ -34,15 +36,27 @@ public class UserService {
         return repository.save(user);
     }
 
-    public Page<User> queryByPage(UserCondition user, Pageable pageable) {
-        ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
-                .withMatcher("username", ExampleMatcher.GenericPropertyMatchers.startsWith()) //姓名采用“开始匹配”的方式查询
-                .withIgnorePaths("id");
-        User user1 = new ModelMapper().map(user, User.class);
-        Example<User> ex = Example.of(user1, matcher);
-//        repository.findAll(null, null);
-//        Predicate predicate = user1.user.equalsIgnoreCase("dave")
-//                .and(user.lastname.startsWithIgnoreCase("mathews"));
-        return repository.findAll(ex, pageable);
+    public Page<User> queryByPage(UserCondition condition, Pageable pageable) {
+//        ExampleMatcher matcher = ExampleMatcher.matching() //构建对象
+//                .withMatcher("username", ExampleMatcher.GenericPropertyMatchers.startsWith())
+//                .withIgnorePaths("id");
+//        User user1 = new ModelMapper().map(condition, User.class);
+//        Example<User> ex = Example.of(user1, matcher);
+        return repository.findAll(toPredicate(condition), pageable);
     }
+
+    private Predicate toPredicate(UserCondition condition) {
+        BooleanBuilder builder = new BooleanBuilder();
+        QUser user = QUser.user;
+        String username = condition.getUsername();
+        if (StringUtils.isNoneBlank(username)) {
+            builder.and(user.username.startsWith(username));
+        }
+        Boolean enabled = condition.getEnabled();
+        if (Objects.nonNull(enabled)) {
+            builder.and(user.enabled.eq(enabled));
+        }
+        return builder;
+    }
+
 }
