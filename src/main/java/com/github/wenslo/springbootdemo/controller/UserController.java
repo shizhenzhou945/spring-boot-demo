@@ -29,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/save")
-    private Response save(@RequestBody User user) {
+    public Response save(@RequestBody User user) {
         userService.save(user);
         return Response.SUCCESS;
     }
@@ -41,6 +41,6 @@ public class UserController {
 
     @RequestMapping("/queryByPage")
     public Page<User> queryByPage(@RequestBody UserCondition condition) {
-        return userService.queryByPage(condition, condition.getPageable());
+        return userService.getByCondition(condition, condition.getPageable());
     }
 }
