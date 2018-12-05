@@ -1,5 +1,7 @@
 package com.github.wenslo.springbootdemo.condition;
 
+import com.github.wenslo.springbootdemo.base.condition.BaseCondition;
+
 /**
  * @author wenhailin
  * @version 0.0.1

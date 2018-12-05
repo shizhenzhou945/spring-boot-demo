@@ -1,8 +1,10 @@
-package com.github.wenslo.springbootdemo.service;
+package com.github.wenslo.springbootdemo.service.impl;
 
+import com.github.wenslo.springbootdemo.base.service.impl.BaseServiceImpl;
 import com.github.wenslo.springbootdemo.condition.UserCondition;
 import com.github.wenslo.springbootdemo.model.QUser;
 import com.github.wenslo.springbootdemo.model.User;
+import com.github.wenslo.springbootdemo.service.UserService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import org.apache.commons.lang3.StringUtils;

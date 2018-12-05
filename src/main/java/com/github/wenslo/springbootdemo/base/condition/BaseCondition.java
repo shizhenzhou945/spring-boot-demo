@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.condition;
+package com.github.wenslo.springbootdemo.base.condition;
 
 
 import com.github.wenslo.springbootdemo.domain.Pageable;
@@ -10,6 +10,7 @@ import com.github.wenslo.springbootdemo.domain.Pageable;
  * @description
  */
 public class BaseCondition {
+    protected Long id;
     protected Pageable pageable;
 
     public Pageable getPageable() {
@@ -17,6 +18,15 @@ public class BaseCondition {
     }
 
     public void setPageable(Pageable pageable) {
+
         this.pageable = pageable;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

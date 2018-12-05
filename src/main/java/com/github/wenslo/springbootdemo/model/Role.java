@@ -1,5 +1,6 @@
 package com.github.wenslo.springbootdemo.model;
 
+import com.github.wenslo.springbootdemo.base.model.BaseIdEntity;
 import com.github.wenslo.springbootdemo.convert.StringListConverter;
 
 import javax.persistence.Column;

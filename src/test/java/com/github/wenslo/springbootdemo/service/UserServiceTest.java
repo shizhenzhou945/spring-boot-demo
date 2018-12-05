@@ -28,7 +28,7 @@ public class UserServiceTest extends BaseTestCase {
     @Test
     public void testFindAll() {
         UserCondition condition = new UserCondition();
-        condition.setUsername("user3");
+        condition.setUsername("user2");
         Pageable pageable = new Pageable();
         Page<User> page = userService.getByCondition(condition, pageable);
         logger.info("page data is {}", gson.toJson(page));

@@ -1,5 +1,6 @@
 package com.github.wenslo.springbootdemo.service;
 
+import com.github.wenslo.springbootdemo.base.service.BaseService;
 import com.github.wenslo.springbootdemo.condition.UserCondition;
 import com.github.wenslo.springbootdemo.model.User;
 import org.springframework.stereotype.Service;
