@@ -1,7 +1,7 @@
-package com.github.wenslo.springbootdemo.model;
+package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.base.model.BaseIdEntity;
 import com.github.wenslo.springbootdemo.convert.StringListConverter;
+import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import com.google.common.collect.Lists;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

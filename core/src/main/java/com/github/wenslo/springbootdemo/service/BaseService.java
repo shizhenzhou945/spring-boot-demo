@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.base.service;
+package com.github.wenslo.springbootdemo.service;
 
 import com.github.wenslo.springbootdemo.domain.Pageable;
 import org.springframework.data.domain.Page;

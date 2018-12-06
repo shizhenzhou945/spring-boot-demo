@@ -2,9 +2,10 @@ package com.github.wenslo.springbootdemo.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
-import com.github.wenslo.springbootdemo.condition.UserCondition;
+import com.github.wenslo.springbootdemo.condition.system.UserCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
-import com.github.wenslo.springbootdemo.model.User;
+import com.github.wenslo.springbootdemo.model.system.User;
+import com.github.wenslo.springbootdemo.service.system.UserService;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;

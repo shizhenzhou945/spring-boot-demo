@@ -1,6 +1,7 @@
-package com.github.wenslo.springbootdemo.reposiroty;
+package com.github.wenslo.springbootdemo.reposiroty.system;
 
-import com.github.wenslo.springbootdemo.model.User;
+import com.github.wenslo.springbootdemo.model.system.User;
+import com.github.wenslo.springbootdemo.reposiroty.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 /**

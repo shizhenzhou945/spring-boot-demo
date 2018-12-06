@@ -1,6 +1,6 @@
-package com.github.wenslo.springbootdemo.condition;
+package com.github.wenslo.springbootdemo.condition.system;
 
-import com.github.wenslo.springbootdemo.base.condition.BaseCondition;
+import com.github.wenslo.springbootdemo.condition.BaseCondition;
 
 /**
  * @author wenhailin

@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.security.provider;
 
-import com.github.wenslo.springbootdemo.model.User;
-import com.github.wenslo.springbootdemo.reposiroty.UserRepository;
+import com.github.wenslo.springbootdemo.model.system.User;
+import com.github.wenslo.springbootdemo.reposiroty.system.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,11 +27,8 @@ public class MainUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {
-            return null;
+            return new User();
         }
-
-//        List<GrantedAuthority> roles = user.getRoles().stream().map(Role::getRoleName).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
         return user;
     }
 }

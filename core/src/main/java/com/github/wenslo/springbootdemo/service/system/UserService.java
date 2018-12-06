@@ -1,8 +1,8 @@
-package com.github.wenslo.springbootdemo.service;
+package com.github.wenslo.springbootdemo.service.system;
 
-import com.github.wenslo.springbootdemo.base.service.BaseService;
-import com.github.wenslo.springbootdemo.condition.UserCondition;
-import com.github.wenslo.springbootdemo.model.User;
+import com.github.wenslo.springbootdemo.condition.system.UserCondition;
+import com.github.wenslo.springbootdemo.model.system.User;
+import com.github.wenslo.springbootdemo.service.BaseService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

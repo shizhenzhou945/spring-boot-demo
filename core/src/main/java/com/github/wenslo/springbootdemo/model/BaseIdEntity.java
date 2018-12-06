@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.base.model;
+package com.github.wenslo.springbootdemo.model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

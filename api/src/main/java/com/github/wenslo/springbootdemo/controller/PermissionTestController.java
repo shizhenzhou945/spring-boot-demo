@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.controller;
 
 import com.github.wenslo.springbootdemo.domain.Response;
-import com.github.wenslo.springbootdemo.service.UserService;
+import com.github.wenslo.springbootdemo.service.system.UserService;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

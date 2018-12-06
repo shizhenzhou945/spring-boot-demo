@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.security;
 
-import com.github.wenslo.springbootdemo.model.User;
+import com.github.wenslo.springbootdemo.model.system.User;
 import com.github.wenslo.springbootdemo.security.token.CustomAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 

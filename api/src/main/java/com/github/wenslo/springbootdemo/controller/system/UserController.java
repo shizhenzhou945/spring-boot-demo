@@ -1,9 +1,9 @@
-package com.github.wenslo.springbootdemo.controller;
+package com.github.wenslo.springbootdemo.controller.system;
 
-import com.github.wenslo.springbootdemo.condition.UserCondition;
+import com.github.wenslo.springbootdemo.condition.system.UserCondition;
 import com.github.wenslo.springbootdemo.domain.Response;
-import com.github.wenslo.springbootdemo.model.User;
-import com.github.wenslo.springbootdemo.service.UserService;
+import com.github.wenslo.springbootdemo.model.system.User;
+import com.github.wenslo.springbootdemo.service.system.UserService;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
