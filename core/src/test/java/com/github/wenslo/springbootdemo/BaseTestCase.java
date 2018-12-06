@@ -32,7 +32,7 @@ import java.io.Reader;
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SpringBootDemoApplication.class)
+@SpringBootTest(classes = JpaConfig.class)
 @ActiveProfiles("test")
 public abstract class BaseTestCase extends DataSourceBasedDBTestCase {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());

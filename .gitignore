@@ -112,3 +112,4 @@ gradle-app.setting
 !gradle-wrapper.jar
 
 src/main/generated
+/core/src/main/generated/

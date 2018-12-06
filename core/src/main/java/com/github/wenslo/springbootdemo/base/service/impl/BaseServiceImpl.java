@@ -1,7 +1,8 @@
-package com.github.wenslo.springbootdemo.service;
+package com.github.wenslo.springbootdemo.base.service.impl;
 
+import com.github.wenslo.springbootdemo.base.repository.BaseRepository;
+import com.github.wenslo.springbootdemo.base.service.BaseService;
 import com.github.wenslo.springbootdemo.domain.Pageable;
-import com.github.wenslo.springbootdemo.reposiroty.BaseRepository;
 import com.google.common.collect.Lists;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.List;
 public abstract class BaseServiceImpl<T, C> implements BaseService<T, C> {
     @Autowired
     protected BaseRepository<T, Long> repository;
+
+
+    private List<Predicate> list = Lists.newArrayList();
 
     @Override
     public T get(Long id) {

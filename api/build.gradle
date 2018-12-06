@@ -1,0 +1,24 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+    id "org.springframework.boot" version "2.1.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+}
+
+dependencies {
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
+    compile project(":core")
+}
+//bootJar {
+//    manifest {
+//        attributes 'Start-Class': 'com.github.wenslo.springbootdemo.SpringBootDemoApplication'
+//    }
+//}
+
