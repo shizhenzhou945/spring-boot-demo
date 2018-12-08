@@ -30,7 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private MainAuthenticationFailureHandler mainAuthenticationFailureHandler;
     @Autowired
     private MainLogoutSuccessHandler mainLogoutSuccessHandler;
-
+    @Autowired
+    private MainAccessDeniedHandler mainAccessDeniedHandler;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -55,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationProvider(mainAuthenticationProvider)
                 .exceptionHandling()
                 .authenticationEntryPoint(mainAuthenticationEntryPoint)
+                .accessDeniedHandler(mainAccessDeniedHandler)
 
         ;
         http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

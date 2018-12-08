@@ -19,7 +19,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
  * @author wenhailin
  * @version 0.0.1
  * @createTime 2018年11月25日 下午12:45
- * @description 基础测试基类
+ * @description facade层的测试
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootDemoApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
