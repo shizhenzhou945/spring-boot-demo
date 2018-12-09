@@ -1,6 +1,7 @@
 package com.github.wenslo.springbootdemo.security.provider;
 
 import com.github.wenslo.springbootdemo.domain.Response;
+import com.github.wenslo.springbootdemo.security.SecurityUtil;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +33,12 @@ public class MainAuthenticationSuccessHandler implements AuthenticationSuccessHa
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
-        writer.append(gson.toJson(Response.LOGIN_SUCCESS));
+        Response loginSuccess = Response.LOGIN_SUCCESS;
+        loginSuccess.setData(SecurityUtil.getLoginUser());
+        writer.append(gson.toJson(loginSuccess));
         writer.flush();
         writer.close();
+        //TODO redirect to fetch permission data
+//        response.sendRedirect();
     }
 }

@@ -28,7 +28,7 @@ public class MainAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter writer = response.getWriter();
-        writer.append(gson.toJson(Response.UNAUTHORIZED));
+        writer.append(gson.toJson(Response.FORBIDDEN));
         writer.flush();
     }
 }

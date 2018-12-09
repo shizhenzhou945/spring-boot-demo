@@ -14,6 +14,7 @@ import static org.springframework.http.HttpStatus.OK;
  * @description
  */
 public class Response implements Serializable {
+    private static final long serialVersionUID = -2785495712642789500L;
     private int code;
     private String msg;
     private Object data;
@@ -36,6 +37,7 @@ public class Response implements Serializable {
     public static final Response SUCCESS = new Response(OK.value(), OK.getReasonPhrase());
     public static final Response ERROR = new Response(INTERNAL_SERVER_ERROR.value(), INTERNAL_SERVER_ERROR.getReasonPhrase());
     public static final Response UNAUTHORIZED = new Response(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+    public static final Response FORBIDDEN = new Response(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase());
     public static final Response LOGIN_FAIL = new Response(HttpStatus.INTERNAL_SERVER_ERROR.value(), LOGIN_FAIL_MSG);
     public static final Response LOGIN_SUCCESS = new Response(HttpStatus.OK.value(), LOGIN_SUCCESS_MSG);
     public static final Response LOGOUT_SUCCESS = new Response(HttpStatus.OK.value(), LOGOUT_SUCCESS_MSG);
