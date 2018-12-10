@@ -13,3 +13,6 @@ spring:
         show_sql: false
         use_sql_comments: true
         format_sql: false
+logging:
+  level:
+    com.github.wenslo: debug
