@@ -20,8 +20,7 @@ public class Role extends BaseIdEntity {
     private String roleName;
     @Column(name = "permission", length = 1024)
     @Convert(converter = StringListConverter.class)
-    private List<String> permission;
-
+    private List<Permission> permission;
 
     public String getRoleName() {
         return roleName;
@@ -31,12 +30,11 @@ public class Role extends BaseIdEntity {
         this.roleName = roleName;
     }
 
-
-    public List<String> getPermission() {
+    public List<Permission> getPermission() {
         return permission;
     }
 
-    public void setPermission(List<String> permission) {
+    public void setPermission(List<Permission> permission) {
         this.permission = permission;
     }
 }

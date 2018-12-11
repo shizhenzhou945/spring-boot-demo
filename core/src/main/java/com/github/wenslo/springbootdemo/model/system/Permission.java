@@ -13,6 +13,16 @@ public class Permission implements Serializable {
     private String value;
     /** 权限描述 **/
     private String label;
+    /** 是否启用 **/
+    private boolean enabled;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getValue() {
         return value;
@@ -38,11 +48,18 @@ public class Permission implements Serializable {
         this.label = label;
     }
 
+    public Permission(String value, String label, boolean enabled) {
+        this.value = value;
+        this.label = label;
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "Permission{" +
                 "value='" + value + '\'' +
                 ", label='" + label + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }

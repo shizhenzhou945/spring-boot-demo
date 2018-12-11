@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.convert.StringListConverter;
+import com.github.wenslo.springbootdemo.convert.JsonConverter;
 import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import com.google.common.collect.Lists;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,8 +30,8 @@ public class User extends BaseIdEntity implements UserDetails {
     private String password;
     /** 权限 **/
     @Column(name = "permission", length = 1024)
-    @Convert(converter = StringListConverter.class)
-    private List<String> permission;
+    @Convert(converter = JsonConverter.class)
+    private List<Permission> permission;
     /** 角色 **/
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -69,12 +69,11 @@ public class User extends BaseIdEntity implements UserDetails {
         this.password = password;
     }
 
-
-    public List<String> getPermission() {
+    public List<Permission> getPermission() {
         return permission;
     }
 
-    public void setPermission(List<String> permission) {
+    public void setPermission(List<Permission> permission) {
         this.permission = permission;
     }
 
@@ -156,14 +155,18 @@ public class User extends BaseIdEntity implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<String> authorities = Lists.newArrayList();
         if (!permission.isEmpty()) {
-            authorities.addAll(permission);
+            authorities.addAll(getPermissionCollect(this.permission));
         }
         if (!roles.isEmpty()) {
             roles.forEach(it -> {
-                authorities.addAll(it.getPermission());
+                authorities.addAll(getPermissionCollect(it.getPermission()));
 //                authorities.add(it.getRoleName());
             });
         }
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }
+
+    private List<String> getPermissionCollect(List<Permission> permissions) {
+        return permissions.stream().filter(Permission::isEnabled).map(Permission::getValue).collect(Collectors.toList());
     }
 }

@@ -34,10 +34,10 @@ public class EnumCollector implements CommandLineRunner {
         for (Class<? extends BaseEnum> it : types) {
             Method valuesMethod = it.getMethod("values");
             Method labelMethod = it.getMethod("getLabel");
-            Enum<? extends BaseEnum>[] result = (Enum<? extends BaseEnum>[]) valuesMethod.invoke(it, null);
+            Enum<? extends BaseEnum>[] result = (Enum<? extends BaseEnum>[]) valuesMethod.invoke(it, new Object[]{});
             List<SimpleEnum> list = Lists.newArrayList();
             for (Enum<? extends BaseEnum> anEnum : result) {
-                list.add(new SimpleEnum(anEnum.ordinal(), anEnum.name(), (String) labelMethod.invoke(anEnum, null)));
+                list.add(new SimpleEnum(anEnum.ordinal(), anEnum.name(), (String) labelMethod.invoke(anEnum, new Object[]{})));
             }
             enums.put(it.getSimpleName(), list);
             logger.debug("enums is {}", enums);

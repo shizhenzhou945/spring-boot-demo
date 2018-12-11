@@ -1,17 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
     <!-- user -->
-    <user id="-1" username="user1" password="1234" permission="MANAGER" created_at="2018-11-25 07:15:07"
+    <user id="-1" username="user1" password="1234"
+          permission='[{"value":"USER_ADD","label":"用户添加","enabled":true},{"value":"USER_VIEW","label":"用户查看","enabled":true},{"value":"USER_DELETE","label":"用户删除","enabled":true},{"value":"USER_UPDATE","label":"用户修改","enabled":true}]'
+          created_at="2018-11-25 07:15:07"
           updated_at="2018-11-25 07:15:16" account_non_expired="0" account_non_locked="0" credentials_non_expired="0"
           enabled="0"/>
 
-    <user id="-2" username="user2" password="1234" created_at="2018-11-25 07:15:07" permission="USER_ADD"
+    <user id="-2" username="user2" password="1234" created_at="2018-11-25 07:15:07"
+          permission='[{"value":"USER_VIEW","label":"用户查看","enabled":true}]'
           updated_at="2018-11-25 07:15:16" account_non_expired="0" account_non_locked="0" credentials_non_expired="0"
           enabled="0"/>
 
     <!-- role -->
     <role id="-1" created_at="2018-11-25 07:15:07" updated_at="2018-11-25 07:15:16" role_name="user manager"
-          permission="USER:VIEW,USER:ADD,USER:UPDATE,USER:DELETE"/>
+          permission='[{"value":"USER_ADD","label":"用户添加","enabled":true},{"value":"USER_VIEW","label":"用户查看","enabled":true},{"value":"USER_DELETE","label":"用户删除","enabled":true},{"value":"USER_UPDATE","label":"用户修改","enabled":true}]'/>
     <!-- user_role -->
     <user_role user_id="-1" role_id="-1"/>
 </dataset>

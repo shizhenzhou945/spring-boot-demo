@@ -22,7 +22,7 @@ public class StringListConverter implements AttributeConverter<List<String>, Str
     @Override
     public String convertToDatabaseColumn(List<String> attribute) {
         if (Objects.nonNull(attribute) && !attribute.isEmpty()) {
-            return attribute.stream().collect(Collectors.joining(","));
+            return String.join(",", attribute);
         }
         return null;
     }
