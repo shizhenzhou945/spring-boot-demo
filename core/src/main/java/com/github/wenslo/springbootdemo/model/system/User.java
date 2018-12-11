@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.convert.JsonConverter;
+import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import com.google.common.collect.Lists;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +31,7 @@ public class User extends BaseIdEntity implements UserDetails {
     private String password;
     /** 权限 **/
     @Column(name = "permission", length = 1024)
-    @Convert(converter = JsonConverter.class)
+    @Convert(converter = PermissionConverter.class)
     private List<Permission> permission;
     /** 角色 **/
     @ManyToMany(fetch = FetchType.EAGER)
@@ -49,6 +50,8 @@ public class User extends BaseIdEntity implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Transient
+    private Map<String, List<Permission>> permissionMap;
 
     @Override
     public String getUsername() {
@@ -159,14 +162,42 @@ public class User extends BaseIdEntity implements UserDetails {
         }
         if (!roles.isEmpty()) {
             roles.forEach(it -> {
-                authorities.addAll(getPermissionCollect(it.getPermission()));
-//                authorities.add(it.getRoleName());
+                List<Permission> rolePermissions = it.getPermission();
+                if (!rolePermissions.isEmpty()) {
+                    authorities.addAll(getPermissionCollect(rolePermissions));
+                }
             });
         }
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
+    public Map<String, List<Permission>> getPermissionMap() {
+        return permissionMap;
+    }
+
+    public void setPermissionMap(Map<String, List<Permission>> permissionMap) {
+        this.permissionMap = permissionMap;
+    }
+
     private List<String> getPermissionCollect(List<Permission> permissions) {
-        return permissions.stream().filter(Permission::isEnabled).map(Permission::getValue).collect(Collectors.toList());
+        return permissions.stream().filter(Permission::isEnabled).map(Permission::getGroup).collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", permission=" + permission +
+                ", roles=" + roles +
+                ", accountNonExpired=" + accountNonExpired +
+                ", accountNonLocked=" + accountNonLocked +
+                ", credentialsNonExpired=" + credentialsNonExpired +
+                ", enabled=" + enabled +
+                ", permissionMap=" + permissionMap +
+                ", id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

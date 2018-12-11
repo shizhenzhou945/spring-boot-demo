@@ -9,18 +9,20 @@ import com.github.wenslo.springbootdemo.annotation.PermissionGroup;
  * @createTime 2018年12月09日 下午7:37
  * @description
  */
-@PermissionGroup(label = "用户相关权限")
+@PermissionGroup
 public class UserPermission {
-    @Permission(value = "用户查看")
+    private static final String USER_PERMISSION = "用户权限";
+
+    @Permission(value = "用户查看", group = USER_PERMISSION)
     public static final String USER_VIEW = "USER:VIEW";
 
-    @Permission(value = "用户添加")
+    @Permission(value = "用户添加", group = USER_PERMISSION)
     public static final String USER_ADD = "USER:ADD";
 
-    @Permission(value = "用户修改")
+    @Permission(value = "用户修改", group = USER_PERMISSION)
     public static final String USER_UPDATE = "USER:UPDATE";
 
-    @Permission(value = "用户删除")
+    @Permission(value = "用户删除", group = USER_PERMISSION)
     public static final String USER_DELETE = "USER:DELETE";
 
 

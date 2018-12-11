@@ -38,27 +38,26 @@ public class PermissionCollector implements BeanPostProcessor {
         PermissionGroup permissionGroup = beanClass.getAnnotation(PermissionGroup.class);
         if (Objects.nonNull(permissionGroup)) {
             logger.debug("The permission name is {}", beanClass.getName());
-            putIfPresent(permissionGroup.label(), beanClass);
+            putIfPresent(beanClass);
         }
         return bean;
     }
 
-    private void putIfPresent(String groupName, Class<?> clazz) {
+    private void putIfPresent(Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
-        List<Permission> permissionList = permission.get(groupName);
-        if (Objects.isNull(permissionList)) {
-            List<Permission> list = Arrays.stream(fields).map(s -> {
-                com.github.wenslo.springbootdemo.annotation.Permission annotation = s.getAnnotation(com.github.wenslo.springbootdemo.annotation.Permission.class);
-                try {
-                    logger.debug("get name is {}", s.get(clazz));
-                    return new Permission(annotation.value(), (String) s.get(clazz));
-                } catch (IllegalAccessException e) {
-                    logger.error("convert permission label is error", e);
-                    return null;
-                }
-            }).collect(Collectors.toList());
-            permission.put(groupName, list);
-        }
 
+        Map<String, List<Permission>> map = Arrays.stream(fields)
+                .filter(s -> Objects.nonNull(s.getAnnotation(com.github.wenslo.springbootdemo.annotation.Permission.class)))
+                .map(s -> {
+                    com.github.wenslo.springbootdemo.annotation.Permission annotation = s.getAnnotation(com.github.wenslo.springbootdemo.annotation.Permission.class);
+                    try {
+                        logger.debug("get name is {}", s.get(clazz));
+                        return new Permission(annotation.value(), (String) s.get(clazz), annotation.group());
+                    } catch (IllegalAccessException e) {
+                        logger.error("convert permission label is error", e);
+                        return null;
+                    }
+                }).collect(Collectors.toList()).stream().collect(Collectors.groupingBy(Permission::getGroup));
+        permission.putAll(map);
     }
 }

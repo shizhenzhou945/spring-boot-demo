@@ -1,6 +1,8 @@
 package com.github.wenslo.springbootdemo.convert;
 
+import com.github.wenslo.springbootdemo.model.system.Permission;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,13 +18,13 @@ import java.util.Objects;
  * @description json to column
  */
 @Converter
-public class JsonConverter<T> implements AttributeConverter<List<T>, String> {
+public class PermissionConverter implements AttributeConverter<List<Permission>, String> {
 
     @Autowired
     private Gson gson;
 
     @Override
-    public String convertToDatabaseColumn(List<T> attribute) {
+    public String convertToDatabaseColumn(List<Permission> attribute) {
         if (Objects.nonNull(attribute) && !attribute.isEmpty()) {
             return gson.toJson(attribute);
         }
@@ -30,9 +32,11 @@ public class JsonConverter<T> implements AttributeConverter<List<T>, String> {
     }
 
     @Override
-    public List<T> convertToEntityAttribute(String dbData) {
+    public List<Permission> convertToEntityAttribute(String dbData) {
         if (StringUtils.isNotBlank(dbData)) {
-            return gson.fromJson(dbData, List.class);
+            return gson.fromJson(dbData,
+                    new TypeToken<List<Permission>>() {
+                    }.getType());
         }
         return null;
     }

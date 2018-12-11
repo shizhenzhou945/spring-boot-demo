@@ -16,5 +16,4 @@ import java.lang.annotation.*;
 @Documented
 @Component
 public @interface PermissionGroup {
-    String label();
 }

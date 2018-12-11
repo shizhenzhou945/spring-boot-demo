@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.convert.StringListConverter;
+import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 
 import javax.persistence.Column;
@@ -19,7 +19,7 @@ public class Role extends BaseIdEntity {
     @Column(name = "role_name")
     private String roleName;
     @Column(name = "permission", length = 1024)
-    @Convert(converter = StringListConverter.class)
+    @Convert(converter = PermissionConverter.class)
     private List<Permission> permission;
 
     public String getRoleName() {

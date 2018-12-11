@@ -14,7 +14,9 @@ public class Permission implements Serializable {
     /** 权限描述 **/
     private String label;
     /** 是否启用 **/
-    private boolean enabled;
+    private boolean enabled = false;
+    /** 所属权限组 **/
+    private String group;
 
     public boolean isEnabled() {
         return enabled;
@@ -40,12 +42,21 @@ public class Permission implements Serializable {
         this.label = label;
     }
 
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     public Permission() {
     }
 
-    public Permission(String value, String label) {
+    public Permission(String value, String label, String group) {
         this.value = value;
         this.label = label;
+        this.group = group;
     }
 
     public Permission(String value, String label, boolean enabled) {
@@ -60,6 +71,7 @@ public class Permission implements Serializable {
                 "value='" + value + '\'' +
                 ", label='" + label + '\'' +
                 ", enabled=" + enabled +
+                ", group=" + group +
                 '}';
     }
 }
