@@ -2,16 +2,13 @@ package com.github.wenslo.springbootdemo.model.system;
 
 import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.BaseIdEntity;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -49,6 +46,7 @@ public class User extends BaseIdEntity implements UserDetails {
     /** 账户是否启用 **/
     @Column(name = "enabled")
     private boolean enabled;
+
 
     @Transient
     private Map<String, List<Permission>> permissionMap;
@@ -156,7 +154,7 @@ public class User extends BaseIdEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<String> authorities = Lists.newArrayList();
+        Set<String> authorities = Sets.newHashSet();
         if (!permission.isEmpty()) {
             authorities.addAll(getPermissionCollect(this.permission));
         }
@@ -179,8 +177,13 @@ public class User extends BaseIdEntity implements UserDetails {
         this.permissionMap = permissionMap;
     }
 
-    private List<String> getPermissionCollect(List<Permission> permissions) {
-        return permissions.stream().filter(Permission::isEnabled).map(Permission::getGroup).collect(Collectors.toList());
+    /**
+     * collect permission
+     * @param permissions permissions
+     * @return permission str on set
+     */
+    private Set<String> getPermissionCollect(List<Permission> permissions) {
+        return permissions.stream().filter(Permission::isEnabled).map(Permission::getValue).collect(Collectors.toSet());
     }
 
     @Override

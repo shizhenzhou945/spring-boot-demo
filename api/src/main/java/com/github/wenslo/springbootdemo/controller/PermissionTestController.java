@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.controller;
 
 import com.github.wenslo.springbootdemo.domain.Response;
-import com.github.wenslo.springbootdemo.permission.system.UserPermission;
+import com.github.wenslo.springbootdemo.permission.SystemPermission;
 import com.github.wenslo.springbootdemo.service.system.UserService;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class PermissionTestController {
         return Response.success(userService.getAll());
     }
 
-    @PreAuthorize("hasAuthority('"+ UserPermission.USER_ADD+"')")
+    @PreAuthorize("hasAuthority('" + SystemPermission.USER_ADD + "')")
     @RequestMapping("/permission")
     public Response permission() {
         return Response.success(userService.getAll());

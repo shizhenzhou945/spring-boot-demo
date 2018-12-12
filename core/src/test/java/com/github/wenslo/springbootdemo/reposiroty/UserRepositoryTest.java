@@ -5,7 +5,6 @@ import com.github.wenslo.springbootdemo.BaseTestCase;
 import com.github.wenslo.springbootdemo.model.system.QUser;
 import com.github.wenslo.springbootdemo.model.system.User;
 import com.github.wenslo.springbootdemo.reposiroty.system.UserRepository;
-import com.google.gson.Gson;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,8 +24,7 @@ public class UserRepositoryTest extends BaseTestCase {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private Gson gson;
+
 
     @Test
     public void testFindAll() {

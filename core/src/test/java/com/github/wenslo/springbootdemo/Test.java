@@ -16,10 +16,10 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         Gson gson = new GsonBuilder().create();
-        Permission permission = new Permission("USER_ADD", "用户添加", true);
-        Permission permission1 = new Permission("USER_VIEW", "用户查看", true);
-        Permission permission2 = new Permission("USER_DELETE", "用户删除", true);
-        Permission permission3 = new Permission("USER_UPDATE", "用户修改", true);
+        Permission permission = new Permission("USER_ADD", "用户添加", true, "用户相关权限");
+        Permission permission1 = new Permission("USER_VIEW", "用户查看", true, "用户相关权限");
+        Permission permission2 = new Permission("USER_DELETE", "用户删除", true, "用户相关权限");
+        Permission permission3 = new Permission("USER_UPDATE", "用户修改", true, "用户相关权限");
         List<Permission> list = Lists.newArrayList(permission, permission1, permission2, permission3);
         System.out.println(gson.toJson(list));
     }

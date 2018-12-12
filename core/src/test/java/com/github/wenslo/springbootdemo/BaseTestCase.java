@@ -1,6 +1,7 @@
 package com.github.wenslo.springbootdemo;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.google.gson.Gson;
 import org.dbunit.DataSourceBasedDBTestCase;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
@@ -36,7 +37,8 @@ import java.io.Reader;
 @ActiveProfiles("test")
 public abstract class BaseTestCase extends DataSourceBasedDBTestCase {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    @Autowired
+    protected Gson gson;
     @Autowired
     private DataSource dataSource;
 

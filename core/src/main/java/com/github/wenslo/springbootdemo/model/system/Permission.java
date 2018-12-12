@@ -65,6 +65,13 @@ public class Permission implements Serializable {
         this.enabled = enabled;
     }
 
+    public Permission(String value, String label, boolean enabled, String group) {
+        this.value = value;
+        this.label = label;
+        this.enabled = enabled;
+        this.group = group;
+    }
+
     @Override
     public String toString() {
         return "Permission{" +

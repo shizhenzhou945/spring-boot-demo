@@ -1,10 +1,10 @@
 package com.github.wenslo.springbootdemo.controller.system;
 
-import com.github.wenslo.springbootdemo.condition.system.UserCondition;
+import com.github.wenslo.springbootdemo.condition.system.RoleCondition;
 import com.github.wenslo.springbootdemo.controller.BaseController;
 import com.github.wenslo.springbootdemo.domain.Response;
-import com.github.wenslo.springbootdemo.model.system.User;
-import com.github.wenslo.springbootdemo.service.system.UserService;
+import com.github.wenslo.springbootdemo.model.system.Role;
+import com.github.wenslo.springbootdemo.service.system.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,32 +16,31 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author wenhailin
  * @version 0.0.1
- * @createTime 2018年12月02日 下午1:47
- * @description
+ * @createTime 2018年12月12日 上午10:06
+ * @description 角色
  */
 @RestController
-@RequestMapping("user")
-public class UserController extends BaseController {
+@RequestMapping("/role")
+public class RoleController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
-    private UserService userService;
+    private RoleService roleService;
 
     @RequestMapping("/save")
-    public Response save(@RequestBody User user) {
-        userService.save(user);
-        logger.debug("That be saved user is {}", gson.toJson(user));
+    public Response save(@RequestBody Role role) {
+        roleService.save(role);
+        logger.debug("That be saved role is {}", gson.toJson(role));
         return Response.SUCCESS;
     }
 
     @RequestMapping("/queryAll")
     public Response getAll() {
-        return Response.success(userService.getAll());
+        return Response.success(roleService.getAll());
     }
 
     @RequestMapping("/queryByPage")
-    public Page<User> queryByPage(@RequestBody UserCondition condition) {
+    public Page<Role> queryByPage(@RequestBody RoleCondition condition) {
         logger.debug("The currently operator is {}, condition is {}", getLoginUsername(), gson.toJson(condition));
-        return userService.getByCondition(condition, condition.getPageable());
+        return roleService.getByCondition(condition, condition.getPageable());
     }
 }

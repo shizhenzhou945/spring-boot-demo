@@ -1,0 +1,46 @@
+package com.github.wenslo.springbootdemo.reposiroty;
+
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.model.system.QRole;
+import com.github.wenslo.springbootdemo.model.system.Role;
+import com.github.wenslo.springbootdemo.reposiroty.system.RoleRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * @author wenhailin
+ * @version 0.0.1
+ * @createTime 2018年12月12日 上午11:32
+ * @description
+ */
+@DatabaseSetup(value = "/dataset.xml")
+public class RoleRepositoryTest extends BaseTestCase {
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+
+    @Test
+    public void testFindAll() {
+        List<Role> list = roleRepository.findAll();
+        logger.info("list size is {}", list.size());
+        logger.info("list data is {}", gson.toJson(list));
+        Assert.assertTrue(!list.isEmpty());
+    }
+
+    @Test
+    public void testQuerydsl() {
+        String username = "user";
+        QRole role = QRole.role;
+        BooleanExpression booleanExpression = role.roleName.startsWith(username);
+        Optional one = roleRepository.findOne(booleanExpression);
+        Assert.assertTrue(one.isPresent());
+        logger.info("one is {}", gson.toJson(one.get()));
+    }
+}
