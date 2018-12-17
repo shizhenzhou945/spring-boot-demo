@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.1.0.RELEASE'
+        springCloudVersion = 'Greenwich.M1'
     }
 }
 
@@ -17,5 +18,6 @@ subprojects {
         bootJar { enabled = false }
     }
 }
+
 group 'com.github.wenslo'
 version '1.0-SNAPSHOT'
