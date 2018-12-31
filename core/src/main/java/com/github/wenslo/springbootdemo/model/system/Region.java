@@ -4,6 +4,8 @@ import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Entity;
+
 /**
  * @author wenhailin
  * @version 0.0.1
@@ -12,6 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
 public class Region extends BaseIdEntity {
     /** 编码 **/
     private String code;

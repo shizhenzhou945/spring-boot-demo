@@ -5,6 +5,7 @@ import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  * @createTime 2018年11月24日 下午3:59
  * @description
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -57,6 +59,7 @@ public class User extends BaseIdEntity implements UserDetails {
     private boolean enabled;
     /** 所绑定驾校信息 **/
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_organization", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "organization_id")})
     private List<Organization> organizations;
 
     @Transient

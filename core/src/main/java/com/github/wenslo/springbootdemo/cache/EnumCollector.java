@@ -26,6 +26,7 @@ public class EnumCollector implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(EnumCollector.class);
     public final Map<String, List<SimpleEnum>> enums = Maps.newHashMap();
 
+    @SuppressWarnings("unchecked")
     @Override
     public void run(String... args) throws Exception {
         logger.debug("------------------enum preparing-------------------------");
@@ -34,6 +35,7 @@ public class EnumCollector implements CommandLineRunner {
         for (Class<? extends BaseEnum> it : types) {
             Method valuesMethod = it.getMethod("values");
             Method labelMethod = it.getMethod("getLabel");
+
             Enum<? extends BaseEnum>[] result = (Enum<? extends BaseEnum>[]) valuesMethod.invoke(it, new Object[]{});
             List<SimpleEnum> list = Lists.newArrayList();
             for (Enum<? extends BaseEnum> anEnum : result) {
