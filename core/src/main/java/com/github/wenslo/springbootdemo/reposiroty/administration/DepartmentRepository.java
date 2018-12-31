@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.administration;
 
 import com.github.wenslo.springbootdemo.model.administration.Department;
-import com.github.wenslo.springbootdemo.reposiroty.base.LongIdRepository;
+import com.github.wenslo.springbootdemo.reposiroty.base.OrganizationBasicRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * @description 部门
  */
 @Repository
-public interface DepartmentRepository extends LongIdRepository<Department, Long> {
+public interface DepartmentRepository extends OrganizationBasicRepository<Department, Long> {
 
 }

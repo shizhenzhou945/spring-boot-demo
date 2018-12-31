@@ -37,6 +37,8 @@ public class Organization extends LongIdEntity {
     private String contractPhone;
     /** 是否为总部 **/
     private Boolean headquarters;
+    /** 总部ID **/
+    private Long headquartersId;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> users;
 }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class LongIdCondition implements Serializable {
+public abstract class LongIdCondition implements Serializable {
     protected Long id;
     protected List<Long> ids;
     protected Date createdAtStart;
