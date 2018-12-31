@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.model.LongIdEntity;
+import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.administration;
 
-import com.github.wenslo.springbootdemo.model.LongIdEntity;
+import com.github.wenslo.springbootdemo.model.base.OrganizationBasicEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +19,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Department extends LongIdEntity {
+public class Department extends OrganizationBasicEntity {
     /** 部门名称 **/
     private String name;
     /** 父部门 **/

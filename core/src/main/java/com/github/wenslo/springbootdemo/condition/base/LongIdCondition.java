@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.condition;
+package com.github.wenslo.springbootdemo.condition.base;
 
 import lombok.Getter;
 import lombok.Setter;

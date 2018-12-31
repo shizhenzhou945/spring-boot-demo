@@ -3,7 +3,7 @@ package com.github.wenslo.springbootdemo.service.system.impl;
 import com.github.wenslo.springbootdemo.condition.system.UserCondition;
 import com.github.wenslo.springbootdemo.model.system.QUser;
 import com.github.wenslo.springbootdemo.model.system.User;
-import com.github.wenslo.springbootdemo.service.BaseServiceImpl;
+import com.github.wenslo.springbootdemo.service.base.impl.LongIdServiceImpl;
 import com.github.wenslo.springbootdemo.service.system.UserService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 @Service
 @Transactional
-public class UserServiceImpl extends BaseServiceImpl<User, UserCondition> implements UserService {
+public class UserServiceImpl extends LongIdServiceImpl<User, UserCondition> implements UserService {
 
     @Override
     public Predicate toPredicate(UserCondition condition) {

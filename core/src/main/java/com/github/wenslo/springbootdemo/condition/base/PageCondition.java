@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.condition;
+package com.github.wenslo.springbootdemo.condition.base;
 
 
 import com.github.wenslo.springbootdemo.domain.Pageable;

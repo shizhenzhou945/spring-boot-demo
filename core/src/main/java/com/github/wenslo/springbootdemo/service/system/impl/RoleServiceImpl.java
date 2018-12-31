@@ -3,7 +3,7 @@ package com.github.wenslo.springbootdemo.service.system.impl;
 import com.github.wenslo.springbootdemo.condition.system.RoleCondition;
 import com.github.wenslo.springbootdemo.model.system.QRole;
 import com.github.wenslo.springbootdemo.model.system.Role;
-import com.github.wenslo.springbootdemo.service.BaseServiceImpl;
+import com.github.wenslo.springbootdemo.service.base.impl.LongIdServiceImpl;
 import com.github.wenslo.springbootdemo.service.system.RoleService;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class RoleServiceImpl extends BaseServiceImpl<Role, RoleCondition> implements RoleService {
+public class RoleServiceImpl extends LongIdServiceImpl<Role, RoleCondition> implements RoleService {
     @Override
     protected Predicate toPredicate(RoleCondition condition) {
         BooleanBuilder builder = new BooleanBuilder();

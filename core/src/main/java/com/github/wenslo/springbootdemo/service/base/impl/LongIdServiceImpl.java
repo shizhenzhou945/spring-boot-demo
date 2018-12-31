@@ -1,9 +1,10 @@
-package com.github.wenslo.springbootdemo.service;
+package com.github.wenslo.springbootdemo.service.base.impl;
 
-import com.github.wenslo.springbootdemo.condition.LongIdCondition;
+import com.github.wenslo.springbootdemo.condition.base.LongIdCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
-import com.github.wenslo.springbootdemo.model.LongIdEntity;
-import com.github.wenslo.springbootdemo.reposiroty.LongIdRepository;
+import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
+import com.github.wenslo.springbootdemo.reposiroty.base.LongIdRepository;
+import com.github.wenslo.springbootdemo.service.base.LongIdService;
 import com.google.common.collect.Lists;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.List;
  * @createTime 2018年12月04日 上午10:43
  * @description
  */
-public abstract class BaseServiceImpl<T extends LongIdEntity, C extends LongIdCondition> implements BaseService<T, C> {
+public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongIdCondition> implements LongIdService<T, C> {
     @Autowired
     protected LongIdRepository<T, Long> repository;
 

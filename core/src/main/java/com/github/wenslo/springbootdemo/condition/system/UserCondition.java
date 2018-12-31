@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.condition.system;
 
-import com.github.wenslo.springbootdemo.condition.PageCondition;
+import com.github.wenslo.springbootdemo.condition.base.PageCondition;
 
 /**
  * @author wenhailin

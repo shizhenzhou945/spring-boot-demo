@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.administration;
 
 import com.github.wenslo.springbootdemo.model.administration.Department;
-import com.github.wenslo.springbootdemo.reposiroty.LongIdRepository;
+import com.github.wenslo.springbootdemo.reposiroty.base.LongIdRepository;
 import org.springframework.stereotype.Repository;
 
 /**
