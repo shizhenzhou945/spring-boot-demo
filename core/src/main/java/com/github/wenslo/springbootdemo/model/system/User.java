@@ -3,12 +3,18 @@ package com.github.wenslo.springbootdemo.model.system;
 import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import com.google.common.collect.Sets;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +23,9 @@ import java.util.stream.Collectors;
  * @createTime 2018年11月24日 下午3:59
  * @description
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class User extends BaseIdEntity implements UserDetails {
 
@@ -46,111 +55,12 @@ public class User extends BaseIdEntity implements UserDetails {
     /** 账户是否启用 **/
     @Column(name = "enabled")
     private boolean enabled;
-
+    /** 所绑定驾校信息 **/
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Organization> organizations;
 
     @Transient
     private Map<String, List<Permission>> permissionMap;
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Permission> getPermission() {
-        return permission;
-    }
-
-    public void setPermission(List<Permission> permission) {
-        this.permission = permission;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    @Override
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    @Override
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    @Override
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -169,14 +79,6 @@ public class User extends BaseIdEntity implements UserDetails {
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
-    public Map<String, List<Permission>> getPermissionMap() {
-        return permissionMap;
-    }
-
-    public void setPermissionMap(Map<String, List<Permission>> permissionMap) {
-        this.permissionMap = permissionMap;
-    }
-
     /**
      * collect permission
      * @param permissions permissions
@@ -186,21 +88,4 @@ public class User extends BaseIdEntity implements UserDetails {
         return permissions.stream().filter(Permission::isEnabled).map(Permission::getValue).collect(Collectors.toSet());
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", permission=" + permission +
-                ", roles=" + roles +
-                ", accountNonExpired=" + accountNonExpired +
-                ", accountNonLocked=" + accountNonLocked +
-                ", credentialsNonExpired=" + credentialsNonExpired +
-                ", enabled=" + enabled +
-                ", permissionMap=" + permissionMap +
-                ", id=" + id +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }
