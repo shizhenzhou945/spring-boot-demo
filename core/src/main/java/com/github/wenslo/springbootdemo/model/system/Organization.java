@@ -16,7 +16,7 @@ import java.util.List;
  * @author wenhailin
  * @version 0.0.1
  * @createTime 2018-12-31 16:13
- * @description 驾校（机构）
+ * @description 机构（学校，组织）
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
