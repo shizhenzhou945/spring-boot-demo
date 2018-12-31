@@ -1,10 +1,9 @@
-package com.github.wenslo.springbootdemo.reposiroty;
+package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
 import com.github.wenslo.springbootdemo.model.system.QRole;
 import com.github.wenslo.springbootdemo.model.system.Role;
-import com.github.wenslo.springbootdemo.reposiroty.system.RoleRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,8 +28,8 @@ public class RoleRepositoryTest extends BaseTestCase {
     @Test
     public void testFindAll() {
         List<Role> list = roleRepository.findAll();
-        logger.info("list size is {}", list.size());
-        logger.info("list data is {}", gson.toJson(list));
+        logger.debug("list size is {}", list.size());
+        logger.debug("list data is {}", gson.toJson(list));
         Assert.assertTrue(!list.isEmpty());
     }
 

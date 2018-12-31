@@ -1,10 +1,9 @@
-package com.github.wenslo.springbootdemo.reposiroty;
+package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
 import com.github.wenslo.springbootdemo.model.system.QUser;
 import com.github.wenslo.springbootdemo.model.system.User;
-import com.github.wenslo.springbootdemo.reposiroty.system.UserRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,8 +28,8 @@ public class UserRepositoryTest extends BaseTestCase {
     @Test
     public void testFindAll() {
         List<User> list = userRepository.findAll();
-        logger.info("list size is {}", list.size());
-        logger.info("list data is {}", gson.toJson(list));
+        logger.debug("list size is {}", list.size());
+        logger.debug("list data is {}", gson.toJson(list));
         Assert.assertTrue(!list.isEmpty());
     }
 

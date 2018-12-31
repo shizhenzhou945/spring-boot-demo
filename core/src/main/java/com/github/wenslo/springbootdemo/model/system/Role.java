@@ -4,6 +4,7 @@ import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.BaseIdEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import java.util.List;
  * @createTime 2018年11月30日 下午3:01
  * @description
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
