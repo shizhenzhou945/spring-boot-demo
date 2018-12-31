@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.model.system;
 
 import com.github.wenslo.springbootdemo.convert.PermissionConverter;
-import com.github.wenslo.springbootdemo.model.BaseIdEntity;
+import com.github.wenslo.springbootdemo.model.LongIdEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,7 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Role extends BaseIdEntity {
+public class Role extends LongIdEntity {
     @Column(name = "role_name")
     private String roleName;
     @Column(name = "permission", length = 1024)

@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.model.system;
 
 import com.github.wenslo.springbootdemo.convert.PermissionConverter;
-import com.github.wenslo.springbootdemo.model.BaseIdEntity;
+import com.github.wenslo.springbootdemo.model.LongIdEntity;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User extends BaseIdEntity implements UserDetails {
+public class User extends LongIdEntity implements UserDetails {
 
     /** 用户名 **/
     @Column(name = "username")

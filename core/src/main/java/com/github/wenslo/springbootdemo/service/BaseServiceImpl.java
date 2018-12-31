@@ -1,7 +1,9 @@
 package com.github.wenslo.springbootdemo.service;
 
+import com.github.wenslo.springbootdemo.condition.LongIdCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
-import com.github.wenslo.springbootdemo.reposiroty.BaseRepository;
+import com.github.wenslo.springbootdemo.model.LongIdEntity;
+import com.github.wenslo.springbootdemo.reposiroty.LongIdRepository;
 import com.google.common.collect.Lists;
 import com.querydsl.core.types.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,9 @@ import java.util.List;
  * @createTime 2018年12月04日 上午10:43
  * @description
  */
-public abstract class BaseServiceImpl<T, C> implements BaseService<T, C> {
+public abstract class BaseServiceImpl<T extends LongIdEntity, C extends LongIdCondition> implements BaseService<T, C> {
     @Autowired
-    protected BaseRepository<T, Long> repository;
-
-
-    private List<Predicate> list = Lists.newArrayList();
+    protected LongIdRepository<T, Long> repository;
 
     @Override
     public T get(Long id) {

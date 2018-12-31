@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.wenslo.springbootdemo.model.system.Role;
-import com.github.wenslo.springbootdemo.reposiroty.BaseRepository;
+import com.github.wenslo.springbootdemo.reposiroty.LongIdRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * @description
  */
 @Repository
-public interface RoleRepository extends BaseRepository<Role, Long> {
+public interface RoleRepository extends LongIdRepository<Role, Long> {
 }

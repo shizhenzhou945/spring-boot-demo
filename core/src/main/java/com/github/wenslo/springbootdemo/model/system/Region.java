@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.model.BaseIdEntity;
+import com.github.wenslo.springbootdemo.model.LongIdEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Region extends BaseIdEntity {
+public class Region extends LongIdEntity {
     /** 编码 **/
     private String code;
     /** 名称 **/

@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.wenslo.springbootdemo.model.system.Region;
-import com.github.wenslo.springbootdemo.reposiroty.BaseRepository;
+import com.github.wenslo.springbootdemo.reposiroty.LongIdRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
  * @description 地区
  */
 @Repository
-public interface RegionRepository extends BaseRepository<Region, Long> {
+public interface RegionRepository extends LongIdRepository<Region, Long> {
     /**
      * 根据code长度查询地区
      * @param codeLength code长度

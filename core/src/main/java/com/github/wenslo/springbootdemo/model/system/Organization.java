@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.model.BaseIdEntity;
+import com.github.wenslo.springbootdemo.model.LongIdEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Organization extends BaseIdEntity {
+public class Organization extends LongIdEntity {
     /** 全称 **/
     private String fullName;
     /** 简称 **/
@@ -35,6 +35,8 @@ public class Organization extends BaseIdEntity {
     private String contractName;
     /** 联系人电话 **/
     private String contractPhone;
+    /** 是否为总部 **/
+    private Boolean headquarters;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> users;
 }

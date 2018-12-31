@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.condition.system;
 
-import com.github.wenslo.springbootdemo.condition.BaseCondition;
+import com.github.wenslo.springbootdemo.condition.PageCondition;
 
 /**
  * @author wenhailin
@@ -8,7 +8,7 @@ import com.github.wenslo.springbootdemo.condition.BaseCondition;
  * @createTime 2018年12月02日 下午2:50
  * @description
  */
-public class UserCondition extends BaseCondition {
+public class UserCondition extends PageCondition {
     private String username;
     private Boolean enabled;
 

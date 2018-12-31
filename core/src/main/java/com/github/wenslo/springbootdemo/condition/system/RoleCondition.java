@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.condition.system;
 
-import com.github.wenslo.springbootdemo.condition.BaseCondition;
+import com.github.wenslo.springbootdemo.condition.PageCondition;
 
 /**
  * @author wenhailin
@@ -8,7 +8,7 @@ import com.github.wenslo.springbootdemo.condition.BaseCondition;
  * @createTime 2018年12月12日 上午10:32
  * @description
  */
-public class RoleCondition extends BaseCondition {
+public class RoleCondition extends PageCondition {
     private String roleName;
 
     public String getRoleName() {

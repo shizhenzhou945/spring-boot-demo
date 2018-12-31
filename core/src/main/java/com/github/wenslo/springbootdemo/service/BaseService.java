@@ -1,6 +1,7 @@
 package com.github.wenslo.springbootdemo.service;
 
 import com.github.wenslo.springbootdemo.domain.Pageable;
+import com.github.wenslo.springbootdemo.model.LongIdEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @createTime 2018年12月04日 上午10:39
  * @description
  */
-public interface BaseService<T, C> {
+public interface BaseService<T extends LongIdEntity, C> {
     public T get(Long id);
 
     public List<T> getAll();

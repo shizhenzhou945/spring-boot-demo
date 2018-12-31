@@ -16,7 +16,7 @@ import java.util.Date;
  * @description
  */
 @MappedSuperclass
-public abstract class BaseIdEntity {
+public abstract class LongIdEntity {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;

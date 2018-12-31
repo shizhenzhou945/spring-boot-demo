@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.wenslo.springbootdemo.model.system.User;
-import com.github.wenslo.springbootdemo.reposiroty.BaseRepository;
+import com.github.wenslo.springbootdemo.reposiroty.LongIdRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @description
  */
 @Repository
-public interface UserRepository extends BaseRepository<User, Long> {
+public interface UserRepository extends LongIdRepository<User, Long> {
     public User findByUsername(String username);
 
 }
