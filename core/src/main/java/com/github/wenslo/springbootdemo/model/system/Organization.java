@@ -39,6 +39,6 @@ public class Organization extends LongIdEntity {
     private Boolean headquarters;
     /** 总部ID **/
     private Long headquartersId;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<User> users;
 }

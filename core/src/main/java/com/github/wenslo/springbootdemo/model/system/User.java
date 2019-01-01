@@ -58,7 +58,7 @@ public class User extends LongIdEntity implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
     /** 所绑定驾校信息 **/
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_organization", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "organization_id")})
     private List<Organization> organizations;
 
