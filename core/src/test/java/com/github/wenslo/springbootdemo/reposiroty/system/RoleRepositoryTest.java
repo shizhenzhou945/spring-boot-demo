@@ -35,9 +35,9 @@ public class RoleRepositoryTest extends BaseTestCase {
 
     @Test
     public void testQuerydsl() {
-        String username = "user";
+        String roleName = "user";
         QRole role = QRole.role;
-        BooleanExpression booleanExpression = role.roleName.startsWith(username);
+        BooleanExpression booleanExpression = role.roleName.startsWith(roleName);
         Optional one = roleRepository.findOne(booleanExpression);
         Assert.assertTrue(one.isPresent());
         logger.info("one is {}", gson.toJson(one.get()));

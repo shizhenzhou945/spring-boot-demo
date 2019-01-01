@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author wenhailin
  * @version 0.0.1
@@ -20,14 +22,27 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RoleServiceImpl extends LongIdServiceImpl<Role, RoleCondition> implements RoleService {
+//    @Override
+//    protected Predicate toPredicate(RoleCondition condition) {
+//        BooleanBuilder builder = new BooleanBuilder();
+//        QRole role = QRole.role;
+//        String roleName = condition.getRoleName();
+//        if (StringUtils.isNotBlank(roleName)) {
+//            builder.and(role.roleName.startsWith(roleName));
+//        }
+//        return builder;
+//    }
+
     @Override
-    protected Predicate toPredicate(RoleCondition condition) {
+    protected List<Predicate> conditionBuild(RoleCondition condition) {
+        List<Predicate> conditionBuilder = super.conditionBuild(condition);
         BooleanBuilder builder = new BooleanBuilder();
         QRole role = QRole.role;
         String roleName = condition.getRoleName();
         if (StringUtils.isNotBlank(roleName)) {
             builder.and(role.roleName.startsWith(roleName));
         }
-        return builder;
+        conditionBuilder.add(builder);
+        return conditionBuilder;
     }
 }

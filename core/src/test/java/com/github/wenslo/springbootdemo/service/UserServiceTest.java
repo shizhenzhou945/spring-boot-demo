@@ -6,7 +6,6 @@ import com.github.wenslo.springbootdemo.condition.system.UserCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
 import com.github.wenslo.springbootdemo.model.system.User;
 import com.github.wenslo.springbootdemo.service.system.UserService;
-import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class UserServiceTest extends BaseTestCase {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private Gson gson;
 
     @Test
     public void testFindAll() {
