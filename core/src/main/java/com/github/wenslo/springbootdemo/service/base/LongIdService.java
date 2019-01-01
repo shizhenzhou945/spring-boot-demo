@@ -3,7 +3,6 @@ package com.github.wenslo.springbootdemo.service.base;
 import com.github.wenslo.springbootdemo.condition.base.LongIdCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
-import com.querydsl.core.types.dsl.EntityPathBase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
@@ -15,7 +14,7 @@ import java.util.List;
  * @createTime 2018年12月04日 上午10:39
  * @description
  */
-public interface LongIdService<T extends LongIdEntity, C extends LongIdCondition, Q extends EntityPathBase<T>> {
+public interface LongIdService<T extends LongIdEntity, C extends LongIdCondition> {
     public T get(Long id);
 
     public List<T> getAll();

@@ -2,14 +2,16 @@ package com.github.wenslo.springbootdemo.service.base.impl;
 
 import com.github.wenslo.springbootdemo.condition.base.LongIdCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
+import com.github.wenslo.springbootdemo.domain.querydsl.CustomEntityPathBase;
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
-import com.github.wenslo.springbootdemo.model.base.QLongIdEntity;
 import com.github.wenslo.springbootdemo.reposiroty.base.LongIdRepository;
 import com.github.wenslo.springbootdemo.service.base.LongIdService;
 import com.google.common.collect.Lists;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.EntityPathBase;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -25,7 +27,8 @@ import java.util.Objects;
  * @createTime 2018年12月04日 上午10:43
  * @description
  */
-public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongIdCondition, Q extends EntityPathBase<T>> implements LongIdService<T, C, Q> {
+public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongIdCondition> implements LongIdService<T, C> {
+    private static final Logger logger = LoggerFactory.getLogger(LongIdServiceImpl.class);
     @Autowired
     protected LongIdRepository<T, Long> repository;
 
@@ -96,50 +99,61 @@ public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongId
     /**
      * LongIdEntity condition building
      * @param condition query condition
+     * @return The completed basic query condition constructed
+     * <p>On many tests, the reflect speed time is 6ms </p>
      */
     protected List<Predicate> conditionBuild(C condition) {
+//        long start = System.currentTimeMillis();
         Class<T> tClass = getTClass();
-        String name = tClass.getName();
-        EntityPathBase<T> pathBase = new EntityPathBase<>(tClass, name);
-        QLongIdEntity longIdEntity = QLongIdEntity.longIdEntity;
+        CustomEntityPathBase<T> pathBase = new CustomEntityPathBase<>(tClass, getName(tClass));
         Long id = condition.getId();
         if (Objects.nonNull(id)) {
-            conditionBuilder.add(longIdEntity.id.eq(id));
+            conditionBuilder.add(pathBase.id.eq(id));
         }
         List<Long> ids = condition.getIds();
         if (Objects.nonNull(ids) && !ids.isEmpty()) {
-            conditionBuilder.add(longIdEntity.id.in(ids));
+            conditionBuilder.add(pathBase.id.in(ids));
         }
         Date createdAtStart = condition.getCreatedAtStart();
         Date createdAtEnd = condition.getCreatedAtEnd();
         if (Objects.nonNull(createdAtStart) && Objects.nonNull(createdAtEnd)) {
-            conditionBuilder.add(longIdEntity.createdAt.between(createdAtStart, createdAtEnd));
+            conditionBuilder.add(pathBase.createdAt.between(createdAtStart, createdAtEnd));
         } else {
             if (Objects.nonNull(createdAtStart)) {
-                conditionBuilder.add(longIdEntity.createdAt.goe(createdAtStart));
+                conditionBuilder.add(pathBase.createdAt.goe(createdAtStart));
             }
             if (Objects.nonNull(createdAtEnd)) {
-                conditionBuilder.add(longIdEntity.updatedAt.loe(createdAtEnd));
+                conditionBuilder.add(pathBase.updatedAt.loe(createdAtEnd));
             }
         }
 
         Date updatedAtStart = condition.getUpdatedAtStart();
         Date updatedAtEnd = condition.getUpdatedAtEnd();
         if (Objects.nonNull(updatedAtStart) && Objects.nonNull(updatedAtEnd)) {
-            conditionBuilder.add(longIdEntity.updatedAt.between(updatedAtStart, updatedAtEnd));
+            conditionBuilder.add(pathBase.updatedAt.between(updatedAtStart, updatedAtEnd));
         } else {
             if (Objects.nonNull(updatedAtStart)) {
-                conditionBuilder.add(longIdEntity.updatedAt.goe(updatedAtStart));
+                conditionBuilder.add(pathBase.updatedAt.goe(updatedAtStart));
             }
             if (Objects.nonNull(updatedAtEnd)) {
-                conditionBuilder.add(longIdEntity.updatedAt.loe(updatedAtEnd));
+                conditionBuilder.add(pathBase.updatedAt.loe(updatedAtEnd));
             }
         }
+//        long end = System.currentTimeMillis();
+//        logger.debug("本次基础查询构建，总共执行的时间为：{}毫秒", end - start);
         return conditionBuilder;
     }
 
-    public Class<T> getTClass() {
-        Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        return tClass;
+    private String getName(Class<T> tClass) {
+        StringBuilder nameBuilder = new StringBuilder();
+        String name = tClass.getSimpleName();
+        String letterHead = StringUtils.lowerCase(name.substring(0, 1));
+        nameBuilder.append(letterHead).append(name.substring(1));
+        return nameBuilder.toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<T> getTClass() {
+        return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }
