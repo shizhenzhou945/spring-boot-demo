@@ -104,8 +104,7 @@ public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongId
      */
     protected List<Predicate> conditionBuild(C condition) {
 //        long start = System.currentTimeMillis();
-        Class<T> tClass = getTClass();
-        CustomEntityPathBase<T> pathBase = new CustomEntityPathBase<>(tClass, getName(tClass));
+        CustomEntityPathBase<T> pathBase = getEntityPath();
         Long id = condition.getId();
         if (Objects.nonNull(id)) {
             conditionBuilder.add(pathBase.id.eq(id));
@@ -142,6 +141,11 @@ public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongId
 //        long end = System.currentTimeMillis();
 //        logger.debug("本次基础查询构建，总共执行的时间为：{}毫秒", end - start);
         return conditionBuilder;
+    }
+
+    protected CustomEntityPathBase<T> getEntityPath() {
+        Class<T> tClass = getTClass();
+        return new CustomEntityPathBase<>(tClass, getName(tClass));
     }
 
     private String getName(Class<T> tClass) {
