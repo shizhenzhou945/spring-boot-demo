@@ -12,6 +12,6 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class RegionCondition extends LongIdCondition {
+public class DistictCondition extends LongIdCondition {
     private String name;
 }

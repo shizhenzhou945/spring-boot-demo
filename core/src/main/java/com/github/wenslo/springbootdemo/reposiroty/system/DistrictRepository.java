@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
-import com.github.wenslo.springbootdemo.model.system.Region;
+import com.github.wenslo.springbootdemo.model.system.District;
 import com.github.wenslo.springbootdemo.reposiroty.base.LongIdRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,18 +15,18 @@ import java.util.Optional;
  * @description 地区
  */
 @Repository
-public interface RegionRepository extends LongIdRepository<Region, Long> {
+public interface DistrictRepository extends LongIdRepository<District, Long> {
     /**
      * 根据code长度查询地区
      * @param codeLength code长度
      * @return 地区
      */
-    @Query(value = "from Region r where length(r.code) = ?1 ")
-    Optional<List<Region>> findByCodeLength(Integer codeLength);
+    @Query(value = "from District r where length(r.code) = ?1 ")
+    Optional<List<District>> findByCodeLength(Integer codeLength);
 
     /**
      * 查询省，直辖市
      * @return 地区
      */
-    Optional<Region> findByParentCodeIsNull();
+    Optional<District> findByParentCodeIsNull();
 }

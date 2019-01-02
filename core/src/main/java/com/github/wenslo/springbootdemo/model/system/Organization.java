@@ -28,7 +28,7 @@ public class Organization extends LongIdEntity {
     /** 简称 **/
     private String name;
     /** 地区 **/
-    private String region;
+    private String districtCode;
     /** 联系地址 **/
     private String address;
     /** 联系人名称 **/

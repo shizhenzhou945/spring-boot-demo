@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Region extends LongIdEntity {
+public class District extends LongIdEntity {
     /** 编码 **/
     private String code;
     /** 名称 **/
