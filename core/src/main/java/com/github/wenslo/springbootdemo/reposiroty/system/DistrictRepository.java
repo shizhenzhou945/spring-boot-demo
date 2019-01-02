@@ -28,5 +28,5 @@ public interface DistrictRepository extends LongIdRepository<District, Long> {
      * 查询省，直辖市
      * @return 地区
      */
-    Optional<District> findByParentCodeIsNull();
+    Optional<List<District>> findByParentCodeIsNull();
 }

@@ -29,7 +29,7 @@ public class RoleRepositoryTest extends BaseTestCase {
     public void testFindAll() {
         List<Role> list = roleRepository.findAll();
         logger.debug("list size is {}", list.size());
-        logger.debug("list data is {}", gson.toJson(list));
+        logger.debug("list data is {}", list);
         Assert.assertTrue(!list.isEmpty());
     }
 
@@ -40,6 +40,6 @@ public class RoleRepositoryTest extends BaseTestCase {
         BooleanExpression booleanExpression = role.roleName.startsWith(roleName);
         Optional one = roleRepository.findOne(booleanExpression);
         Assert.assertTrue(one.isPresent());
-        logger.info("one is {}", gson.toJson(one.get()));
+        logger.info("one is {}", one.get());
     }
 }

@@ -29,9 +29,9 @@ public class DistrictRepositoryTest extends BaseTestCase {
 
     @Test
     public void testFindByParentCodeIsNull() {
-        District district = districtRepository.findByParentCodeIsNull().orElse(null);
-        Assert.assertNotNull(district);
-        logger.debug("testFindByParentCodeIsNull result is {}", gson.toJson(district));
+        List<District> districts = districtRepository.findByParentCodeIsNull().orElse(null);
+        Assert.assertNotNull(districts);
+        logger.debug("testFindByParentCodeIsNull result is {}", gson.toJson(districts));
     }
 
 

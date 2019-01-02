@@ -29,7 +29,7 @@ public class UserRepositoryTest extends BaseTestCase {
     public void testFindAll() {
         List<User> list = userRepository.findAll();
         logger.debug("list size is {}", list.size());
-        logger.debug("list data is {}", gson.toJson(list));
+        logger.debug("list data is {}", list);
         Assert.assertTrue(!list.isEmpty());
     }
 
@@ -38,7 +38,7 @@ public class UserRepositoryTest extends BaseTestCase {
         String username = "user1";
         User user = userRepository.findByUsername(username);
         Assert.assertNotNull(user);
-        logger.info("username is {} , findByUsername result is {}", user.getUsername(), gson.toJson(user));
+        logger.info("username is {} , findByUsername result is {}", user.getUsername(), user);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class UserRepositoryTest extends BaseTestCase {
         BooleanExpression booleanExpression = user.username.startsWith(username);
         Optional one = userRepository.findOne(booleanExpression);
         Assert.assertTrue(one.isPresent());
-        logger.info("one is {}", gson.toJson(one.get()));
+        logger.info("one is {}", one.get());
     }
 
 }

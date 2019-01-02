@@ -31,6 +31,6 @@ public class RoleServiceTest extends BaseTestCase {
         condition.setId(roleId);
         List<Role> list = roleService.getByCondition(condition);
         Assert.assertTrue(!list.isEmpty());
-        logger.debug("testGetByCondition parameter is {},result is {}", gson.toJson(condition), gson.toJson(list));
+        logger.debug("testGetByCondition parameter is {},result is {}", gson.toJson(condition), list);
     }
 }

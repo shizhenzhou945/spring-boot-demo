@@ -29,7 +29,7 @@ public class UserServiceTest extends BaseTestCase {
         condition.setUsername("user2");
         Pageable pageable = new Pageable();
         Page<User> page = userService.getByCondition(condition, pageable);
-        logger.debug("page data is {}", gson.toJson(page));
+        logger.debug("page data is {}", page);
         Assert.assertTrue(!page.isEmpty());
     }
 

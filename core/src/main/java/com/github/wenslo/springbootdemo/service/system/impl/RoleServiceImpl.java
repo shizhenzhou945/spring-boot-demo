@@ -22,16 +22,6 @@ import java.util.List;
 @Service
 @Transactional
 public class RoleServiceImpl extends LongIdServiceImpl<Role, RoleCondition> implements RoleService {
-//    @Override
-//    protected Predicate toPredicate(RoleCondition condition) {
-//        BooleanBuilder builder = new BooleanBuilder();
-//        QRole role = QRole.role;
-//        String roleName = condition.getRoleName();
-//        if (StringUtils.isNotBlank(roleName)) {
-//            builder.and(role.roleName.startsWith(roleName));
-//        }
-//        return builder;
-//    }
 
     @Override
     protected List<Predicate> conditionBuild(RoleCondition condition) {

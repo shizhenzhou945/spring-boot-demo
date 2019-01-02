@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,8 +24,10 @@ import java.util.Objects;
 @Transactional
 public class UserServiceImpl extends LongIdServiceImpl<User, UserCondition> implements UserService {
 
+
     @Override
-    public Predicate toPredicate(UserCondition condition) {
+    protected List<Predicate> conditionBuild(UserCondition condition) {
+        List<Predicate> conditionBuilder = super.conditionBuild(condition);
         BooleanBuilder builder = new BooleanBuilder();
         QUser user = QUser.user;
         String username = condition.getUsername();
@@ -35,6 +38,7 @@ public class UserServiceImpl extends LongIdServiceImpl<User, UserCondition> impl
         if (Objects.nonNull(enabled)) {
             builder.and(user.enabled.eq(enabled));
         }
-        return builder;
+        conditionBuilder.add(builder);
+        return conditionBuilder;
     }
 }
