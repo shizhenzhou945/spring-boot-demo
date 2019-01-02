@@ -27,7 +27,7 @@ public class RoleServiceTest extends BaseTestCase {
         String roleName = "user";
         Long roleId = -1L;
         RoleCondition condition = new RoleCondition();
-//        condition.setRoleName(roleName);
+        condition.setRoleName(roleName);
         condition.setId(roleId);
         List<Role> list = roleService.getByCondition(condition);
         Assert.assertTrue(!list.isEmpty());
