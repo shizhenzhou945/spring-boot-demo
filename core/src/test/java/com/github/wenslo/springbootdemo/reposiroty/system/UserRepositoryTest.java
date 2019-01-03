@@ -38,7 +38,7 @@ public class UserRepositoryTest extends BaseTestCase {
         String username = "user1";
         User user = userRepository.findByUsername(username);
         Assert.assertNotNull(user);
-        logger.info("username is {} , findByUsername result is {}", user.getUsername(), user);
+        logger.info("username is {} , findByUsername result is {},organizations is {}", user.getUsername(), user, user.getOrganizations());
     }
 
     @Test

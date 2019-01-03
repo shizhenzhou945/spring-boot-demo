@@ -1,10 +1,7 @@
 package com.github.wenslo.springbootdemo.model.system;
 
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +15,9 @@ import java.util.List;
  * @description 机构（学校，组织）
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@ToString(exclude = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
