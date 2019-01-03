@@ -2,6 +2,7 @@ package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.wenslo.springbootdemo.model.system.User;
 import com.github.wenslo.springbootdemo.reposiroty.base.LongIdRepository;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,6 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends LongIdRepository<User, Long> {
+    @EntityGraph(value = "User.Organizations", type = EntityGraph.EntityGraphType.FETCH)
     public User findByUsername(String username);
-
 }

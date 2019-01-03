@@ -3,10 +3,7 @@ package com.github.wenslo.springbootdemo.model.system;
 import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
 import com.google.common.collect.Sets;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,10 +22,14 @@ import java.util.stream.Collectors;
  * @description
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString(exclude = "organizations")
 @Entity
+@NamedEntityGraph(name = "User.Organizations",
+        attributeNodes = @NamedAttributeNode(value = "organizations"))
 public class User extends LongIdEntity implements UserDetails {
 
     /** 用户名 **/
