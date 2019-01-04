@@ -17,7 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -113,8 +113,8 @@ public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongId
         if (Objects.nonNull(ids) && !ids.isEmpty()) {
             conditionBuilder.add(pathBase.id.in(ids));
         }
-        Date createdAtStart = condition.getCreatedAtStart();
-        Date createdAtEnd = condition.getCreatedAtEnd();
+        LocalDateTime createdAtStart = condition.getCreatedAtStart();
+        LocalDateTime createdAtEnd = condition.getCreatedAtEnd();
         if (Objects.nonNull(createdAtStart) && Objects.nonNull(createdAtEnd)) {
             conditionBuilder.add(pathBase.createdAt.between(createdAtStart, createdAtEnd));
         } else {
@@ -126,8 +126,8 @@ public abstract class LongIdServiceImpl<T extends LongIdEntity, C extends LongId
             }
         }
 
-        Date updatedAtStart = condition.getUpdatedAtStart();
-        Date updatedAtEnd = condition.getUpdatedAtEnd();
+        LocalDateTime updatedAtStart = condition.getUpdatedAtStart();
+        LocalDateTime updatedAtEnd = condition.getUpdatedAtEnd();
         if (Objects.nonNull(updatedAtStart) && Objects.nonNull(updatedAtEnd)) {
             conditionBuilder.add(pathBase.updatedAt.between(updatedAtStart, updatedAtEnd));
         } else {

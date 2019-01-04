@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.MappedSuperclass;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author wenhailin
@@ -27,8 +27,8 @@ public abstract class LongIdEntity {
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    protected Date createdAt;
+    protected LocalDateTime createdAt;
     @CreatedDate
     @Column(name = "created_at")
-    protected Date updatedAt;
+    protected LocalDateTime updatedAt;
 }

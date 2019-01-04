@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -18,9 +18,9 @@ import java.util.List;
 public abstract class LongIdCondition implements Serializable {
     protected Long id;
     protected List<Long> ids;
-    protected Date createdAtStart;
-    protected Date createdAtEnd;
-    protected Date updatedAtStart;
-    protected Date updatedAtEnd;
+    protected LocalDateTime createdAtStart;
+    protected LocalDateTime createdAtEnd;
+    protected LocalDateTime updatedAtStart;
+    protected LocalDateTime updatedAtEnd;
 
 }
