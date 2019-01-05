@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author wenhailin
@@ -20,6 +21,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableAutoConfiguration
 @EnableJpaAuditing
+@EnableAsync
 @EnableJpaRepositories(basePackages = "com.github.wenslo.springbootdemo.reposiroty")
 @ComponentScan("com.github.wenslo")
 public class JpaConfig {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author wenhailin
@@ -50,5 +51,17 @@ public class OrganizationRepositoryTest extends BaseTestCase {
         DeleteFlag deleteFlag = DeleteFlag.DELETED;
         Organization organization = organizationRepository.findByIdAndDeleteFlag(id, deleteFlag).orElse(null);
         Assert.assertTrue(Objects.isNull(organization));
+    }
+
+    @Test
+    public void testFindByHeadquartersId() throws InterruptedException {
+        Long headquartersId = null;
+        logger.debug("findByHeadquartersId is begin");
+        CompletableFuture<List<Organization>> future = organizationRepository.findByHeadquartersId(headquartersId);
+        future.thenAccept(it -> {
+            logger.debug("async completableFuture is complete");
+        });
+        logger.debug("Invoked findByHeadquartersId ");
+        Thread.sleep(500);
     }
 }

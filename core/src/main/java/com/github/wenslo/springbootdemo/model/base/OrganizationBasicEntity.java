@@ -18,6 +18,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Setter
 @Getter
+//@Inheritance
 public abstract class OrganizationBasicEntity extends LongIdEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
