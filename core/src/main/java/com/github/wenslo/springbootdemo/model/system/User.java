@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString(exclude = "organizations")
 @Entity
-@NamedEntityGraph(name = "User.Organizations",
+@NamedEntityGraph(name = "user.organizations",
         attributeNodes = @NamedAttributeNode(value = "organizations"))
 public class User extends LongIdEntity implements UserDetails {
 

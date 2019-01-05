@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends LongIdRepository<User, Long> {
-    @EntityGraph(value = "User.Organizations", type = EntityGraph.EntityGraphType.FETCH)
+    @EntityGraph(value = "user.organizations", type = EntityGraph.EntityGraphType.FETCH)
     public User findByUsername(String username);
 }

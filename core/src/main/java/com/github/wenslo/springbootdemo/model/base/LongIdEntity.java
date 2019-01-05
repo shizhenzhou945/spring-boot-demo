@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -20,15 +18,16 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Setter
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public abstract class LongIdEntity {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @LastModifiedDate
+    @CreatedDate
     @Column(name = "updated_at")
     protected LocalDateTime createdAt;
-    @CreatedDate
+    @LastModifiedDate
     @Column(name = "created_at")
     protected LocalDateTime updatedAt;
 }

@@ -38,7 +38,7 @@ public class UserRepositoryTest extends BaseTestCase {
         String username = "user1";
         User user = userRepository.findByUsername(username);
         Assert.assertNotNull(user);
-        logger.info("username is {} , findByUsername result is {},organizations is {}", user.getUsername(), user, user.getOrganizations());
+        logger.debug("username is {} , findByUsername result is {},organizations is {}", user.getUsername(), user, user.getOrganizations());
     }
 
     @Test
@@ -48,7 +48,17 @@ public class UserRepositoryTest extends BaseTestCase {
         BooleanExpression booleanExpression = user.username.startsWith(username);
         Optional one = userRepository.findOne(booleanExpression);
         Assert.assertTrue(one.isPresent());
-        logger.info("one is {}", one.get());
+        logger.debug("one is {}", one.get());
     }
 
+    @Test
+    public void testLastModifyTime() {
+        Long id = -1L;
+        User user = userRepository.findById(id).orElse(null);
+        Assert.assertNotNull(user);
+        logger.debug("The before data last modify time  is {}", user.getUpdatedAt());
+        user.setUsername("Warren Wen");
+        User changedUser = userRepository.save(user);
+        logger.debug("The after data last modify time  is {}", changedUser.getUpdatedAt());
+    }
 }

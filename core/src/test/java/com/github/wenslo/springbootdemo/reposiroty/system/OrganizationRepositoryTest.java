@@ -2,8 +2,12 @@ package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
-import org.junit.Ignore;
+import com.github.wenslo.springbootdemo.model.system.Organization;
+import org.junit.Assert;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @author wenhailin
@@ -12,13 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
-@Ignore
 public class OrganizationRepositoryTest extends BaseTestCase {
 
     @Autowired
     private OrganizationRepository organizationRepository;
-    @Autowired
-    private UserRepository userRepository;
 
-
+    @Test
+    public void testFindByDistrictCode() {
+        String districtCode = "11";
+        List<Organization> organizations = organizationRepository.findByDistrictCode(districtCode);
+        Assert.assertTrue(!organizations.isEmpty());
+        logger.debug("testFindByDistrictCode parameter is {}, result is {}", districtCode, organizations);
+    }
 }
