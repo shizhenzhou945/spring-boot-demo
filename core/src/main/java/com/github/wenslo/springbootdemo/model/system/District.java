@@ -1,6 +1,7 @@
 package com.github.wenslo.springbootdemo.model.system;
 
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +16,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
+@Immutable
 public class District extends LongIdEntity {
     /** 编码 **/
     private String code;

@@ -1,11 +1,13 @@
 package com.github.wenslo.springbootdemo.model.system;
 
+import com.github.wenslo.springbootdemo.enums.common.DeleteFlag;
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
 import lombok.*;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -21,6 +23,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@SQLDelete(sql = "update organization set delete_flag = 'DELETED' where id = ?", check = ResultCheckStyle.COUNT)
+@Where(clause = "delete_flag <> 'DELETED'")
 public class Organization extends LongIdEntity {
     /** 全称 **/
     private String fullName;
@@ -38,6 +42,13 @@ public class Organization extends LongIdEntity {
     private Boolean headquarters;
     /** 总部ID **/
     private Long headquartersId;
+    @Enumerated(EnumType.STRING)
+    private DeleteFlag deleteFlag;
     @ManyToMany(fetch = FetchType.LAZY)
     private List<User> users;
+
+    @PreRemove
+    public void preRemove() {
+        this.deleteFlag = DeleteFlag.DELETED;
+    }
 }
