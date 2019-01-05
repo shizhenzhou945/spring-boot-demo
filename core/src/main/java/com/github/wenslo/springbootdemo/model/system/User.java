@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +34,11 @@ import java.util.stream.Collectors;
 public class User extends LongIdEntity implements UserDetails {
 
     /** 用户名 **/
+    @NotBlank(message = "用户名不能为空")
     @Column(name = "username")
     private String username;
     /** 密码 **/
+    @NotBlank(message = "密码不能为空")
     @Column(name = "password")
     private String password;
     /** 权限 **/

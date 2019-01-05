@@ -61,4 +61,13 @@ public class UserRepositoryTest extends BaseTestCase {
         User changedUser = userRepository.save(user);
         logger.debug("The after data last modify time  is {}", changedUser.getUpdatedAt());
     }
+
+    @Test
+    public void testSave() {
+        User user = new User();
+        user.setUsername("Warren wen");
+        user.setPassword("111111");
+        User result = userRepository.save(user);
+        logger.debug("test save parameter is {} , result is {}", user, result);
+    }
 }
