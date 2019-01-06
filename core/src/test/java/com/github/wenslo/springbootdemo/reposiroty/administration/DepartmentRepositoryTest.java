@@ -3,6 +3,7 @@ package com.github.wenslo.springbootdemo.reposiroty.administration;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.BaseTestCase;
 import com.github.wenslo.springbootdemo.model.administration.Department;
+import org.assertj.core.util.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class DepartmentRepositoryTest extends BaseTestCase {
         List<Department> data = departmentRepository.findByOrganizationHeadquartersIdEquals(organizationId).get();
         Assert.assertTrue(!data.isEmpty());
         logger.debug("testFindByOrganizationHeadquartersIdEquals parameter is {},result is {}", organizationId, data);
+    }
+
+    @Test
+    public void testFindByParentDepartmentIdIn() {
+        List<Long> parameter = Lists.newArrayList(-222L, -333L);
+        List<Long> list = departmentRepository.findByParentDepartmentIdIn(parameter);
+        Assert.assertTrue(list.isEmpty());
+        logger.debug("testFindByParentDepartmentIdIn , parameter is {}, result is {}", parameter, list);
     }
 
 }

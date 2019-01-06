@@ -4,6 +4,8 @@ import com.github.wenslo.springbootdemo.model.administration.Department;
 import com.github.wenslo.springbootdemo.reposiroty.base.OrganizationBasicRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author wenhailin
  * @version 0.0.1
@@ -12,5 +14,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DepartmentRepository extends OrganizationBasicRepository<Department, Long> {
-
+    /**
+     * 根据父部门ID批量查询
+     * @param ids id集合
+     * @return 子部门集合
+     */
+    public List<Long> findByParentDepartmentIdIn(List<Long> ids);
 }

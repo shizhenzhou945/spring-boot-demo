@@ -1,12 +1,11 @@
 package com.github.wenslo.springbootdemo.model.administration;
 
 import com.github.wenslo.springbootdemo.model.base.OrganizationBasicEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * @author wenhailin
@@ -14,8 +13,9 @@ import javax.persistence.Entity;
  * @createTime 2018-12-31 23:45
  * @description 部门
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -23,7 +23,9 @@ public class Department extends OrganizationBasicEntity {
     /** 部门名称 **/
     private String name;
     /** 父部门 **/
-    private Long parentId;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Department parentDepartment;
     /** 排序码 **/
     private Long sorted;
     /** 说明 **/
