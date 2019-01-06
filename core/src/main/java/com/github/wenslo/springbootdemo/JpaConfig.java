@@ -1,5 +1,6 @@
 package com.github.wenslo.springbootdemo;
 
+import com.google.common.eventbus.EventBus;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -29,4 +30,10 @@ public class JpaConfig {
     public Gson gson() {
         return new GsonBuilder().create();
     }
+
+    @Bean
+    public EventBus eventBus() {
+        return new EventBus();
+    }
+
 }

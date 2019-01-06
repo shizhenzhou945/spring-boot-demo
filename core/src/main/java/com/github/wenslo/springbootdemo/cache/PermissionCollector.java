@@ -1,11 +1,14 @@
 package com.github.wenslo.springbootdemo.cache;
 
+import com.github.wenslo.springbootdemo.annotation.eventbus.Observer;
 import com.github.wenslo.springbootdemo.annotation.permission.PermissionGroup;
 import com.github.wenslo.springbootdemo.model.system.Permission;
 import com.google.common.collect.Maps;
+import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +29,8 @@ import java.util.stream.Collectors;
 public class PermissionCollector implements BeanPostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PermissionCollector.class);
     public static final Map<String, List<Permission>> permission = Maps.newHashMap();
+    @Autowired
+    private EventBus eventBus;
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -38,12 +43,17 @@ public class PermissionCollector implements BeanPostProcessor {
         PermissionGroup permissionGroup = beanClass.getAnnotation(PermissionGroup.class);
         if (Objects.nonNull(permissionGroup)) {
             logger.debug("The permission name is {}", beanClass.getName());
-            putIfPresent(beanClass);
+            putPermissionIfPresent(beanClass);
+        }
+        Observer observer = beanClass.getAnnotation(Observer.class);
+        if (Objects.nonNull(observer)) {
+            logger.debug("EventBus registered bean name is {}", beanClass.getName());
+            eventBus.register(bean);
         }
         return bean;
     }
 
-    private void putIfPresent(Class<?> clazz) {
+    private void putPermissionIfPresent(Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
 
         Map<String, List<Permission>> map = Arrays.stream(fields)

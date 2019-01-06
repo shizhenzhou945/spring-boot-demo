@@ -5,9 +5,11 @@ import com.github.wenslo.springbootdemo.model.system.QUser;
 import com.github.wenslo.springbootdemo.model.system.User;
 import com.github.wenslo.springbootdemo.service.base.impl.LongIdServiceImpl;
 import com.github.wenslo.springbootdemo.service.system.UserService;
+import com.google.common.eventbus.EventBus;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,8 @@ import java.util.Objects;
 @Service
 @Transactional
 public class UserServiceImpl extends LongIdServiceImpl<User, UserCondition> implements UserService {
-
+    @Autowired
+    private EventBus eventBus;
 
     @Override
     protected List<Predicate> conditionBuild(UserCondition condition) {
