@@ -1,4 +1,4 @@
-package com.github.wenslo.springbootdemo.annotation;
+package com.github.wenslo.springbootdemo.annotation.permission;
 
 import org.springframework.stereotype.Component;
 

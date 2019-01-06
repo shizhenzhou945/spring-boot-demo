@@ -1,6 +1,6 @@
 package com.github.wenslo.springbootdemo.cache;
 
-import com.github.wenslo.springbootdemo.annotation.PermissionGroup;
+import com.github.wenslo.springbootdemo.annotation.permission.PermissionGroup;
 import com.github.wenslo.springbootdemo.model.system.Permission;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
@@ -47,9 +47,9 @@ public class PermissionCollector implements BeanPostProcessor {
         Field[] fields = clazz.getDeclaredFields();
 
         Map<String, List<Permission>> map = Arrays.stream(fields)
-                .filter(s -> Objects.nonNull(s.getAnnotation(com.github.wenslo.springbootdemo.annotation.Permission.class)))
+                .filter(s -> Objects.nonNull(s.getAnnotation(com.github.wenslo.springbootdemo.annotation.permission.Permission.class)))
                 .map(s -> {
-                    com.github.wenslo.springbootdemo.annotation.Permission annotation = s.getAnnotation(com.github.wenslo.springbootdemo.annotation.Permission.class);
+                    com.github.wenslo.springbootdemo.annotation.permission.Permission annotation = s.getAnnotation(com.github.wenslo.springbootdemo.annotation.permission.Permission.class);
                     try {
                         logger.debug("get name is {}", s.get(clazz));
                         return new Permission(annotation.value(), (String) s.get(clazz), annotation.group());

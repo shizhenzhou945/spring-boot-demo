@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.permission;
 
-import com.github.wenslo.springbootdemo.annotation.Permission;
-import com.github.wenslo.springbootdemo.annotation.PermissionGroup;
+import com.github.wenslo.springbootdemo.annotation.permission.Permission;
+import com.github.wenslo.springbootdemo.annotation.permission.PermissionGroup;
 
 /**
  * @author wenhailin

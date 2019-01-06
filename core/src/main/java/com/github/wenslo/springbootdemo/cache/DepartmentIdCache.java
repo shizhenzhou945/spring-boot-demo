@@ -45,7 +45,6 @@ public class DepartmentIdCache {
      */
     public List<Long> get(Long key) {
         if (Objects.nonNull(key)) {
-            //TODO 检查，如果没有找到对应的数据，则去请求数据库进行查询
             List<Long> present = cache.getIfPresent(key);
             if (Objects.isNull(present)) {
                 List<Long> ids = departmentService.findChildDepartmentIds(key);
