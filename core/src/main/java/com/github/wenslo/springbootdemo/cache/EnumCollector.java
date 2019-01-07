@@ -42,7 +42,7 @@ public class EnumCollector implements CommandLineRunner {
                 list.add(new SimpleEnum(anEnum.ordinal(), anEnum.name(), (String) labelMethod.invoke(anEnum, new Object[]{})));
             }
             enums.put(it.getSimpleName(), list);
-            logger.debug("enums is {}", enums);
+            logger.trace("enums is {}", enums);
         }
     }
 }

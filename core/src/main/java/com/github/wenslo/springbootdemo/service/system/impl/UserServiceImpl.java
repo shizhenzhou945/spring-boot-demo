@@ -29,6 +29,13 @@ public class UserServiceImpl extends LongIdServiceImpl<User, UserCondition> impl
     private EventBus eventBus;
 
     @Override
+    public User save(User entity) {
+        User user = super.save(entity);
+        eventBus.post(user);
+        return user;
+    }
+
+    @Override
     protected List<Predicate> conditionBuild(UserCondition condition) {
         List<Predicate> conditionBuilder = super.conditionBuild(condition);
         BooleanBuilder builder = new BooleanBuilder();

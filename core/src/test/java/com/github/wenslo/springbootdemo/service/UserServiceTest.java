@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
+import java.util.Objects;
+
 /**
  * @author wenhailin
  * @version 0.0.1
@@ -31,6 +33,16 @@ public class UserServiceTest extends BaseTestCase {
         Page<User> page = userService.getByCondition(condition, pageable);
         logger.debug("page data is {}", page);
         Assert.assertTrue(!page.isEmpty());
+    }
+
+    @Test
+    public void testSave() {
+        User user = new User();
+        user.setUsername("Warren Wen");
+        user.setPassword("111111");
+        logger.debug("parameter is {}", user);
+        userService.save(user);
+        Assert.assertTrue(Objects.nonNull(user.getId()));
     }
 
 }

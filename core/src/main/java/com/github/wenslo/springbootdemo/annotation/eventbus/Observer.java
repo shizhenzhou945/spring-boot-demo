@@ -11,8 +11,9 @@ import java.lang.annotation.*;
  * @description
  */
 @Target({ElementType.TYPE})
-@Component
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Component
 public @interface Observer {
 }
+

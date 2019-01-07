@@ -61,7 +61,7 @@ public class PermissionCollector implements BeanPostProcessor {
                 .map(s -> {
                     com.github.wenslo.springbootdemo.annotation.permission.Permission annotation = s.getAnnotation(com.github.wenslo.springbootdemo.annotation.permission.Permission.class);
                     try {
-                        logger.debug("get name is {}", s.get(clazz));
+                        logger.trace("get name is {}", s.get(clazz));
                         return new Permission(annotation.value(), (String) s.get(clazz), annotation.group());
                     } catch (IllegalAccessException e) {
                         logger.error("convert permission label is error", e);
