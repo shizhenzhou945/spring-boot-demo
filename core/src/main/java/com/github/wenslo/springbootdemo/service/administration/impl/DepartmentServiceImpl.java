@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author wenhailin
@@ -32,11 +33,12 @@ public class DepartmentServiceImpl extends OrganizationBasicServiceImpl<Departme
     }
 
     private List<Long> appendChildId(List<Long> result, List<Long> toQueryIds) {
-        List<Long> list = repository.findByParentDepartmentIdIn(toQueryIds);
+        List<Department> list = repository.findByParentDepartmentIdIn(toQueryIds);
         if (list.isEmpty()) {
             return result;
         }
-        result.addAll(list);
-        return appendChildId(result, list);
+        List<Long> collect = list.stream().map(Department::getId).collect(Collectors.toList());
+        result.addAll(collect);
+        return appendChildId(result, collect);
     }
 }

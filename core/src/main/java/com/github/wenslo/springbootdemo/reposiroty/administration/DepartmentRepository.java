@@ -19,5 +19,5 @@ public interface DepartmentRepository extends OrganizationBasicRepository<Depart
      * @param ids id集合
      * @return 子部门集合
      */
-    public List<Long> findByParentDepartmentIdIn(List<Long> ids);
+    public List<Department> findByParentDepartmentIdIn(List<Long> ids);
 }

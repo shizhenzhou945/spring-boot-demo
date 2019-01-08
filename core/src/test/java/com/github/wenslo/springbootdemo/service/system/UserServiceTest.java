@@ -1,11 +1,10 @@
-package com.github.wenslo.springbootdemo.service;
+package com.github.wenslo.springbootdemo.service.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.condition.system.UserCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
 import com.github.wenslo.springbootdemo.model.system.User;
-import com.github.wenslo.springbootdemo.service.system.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

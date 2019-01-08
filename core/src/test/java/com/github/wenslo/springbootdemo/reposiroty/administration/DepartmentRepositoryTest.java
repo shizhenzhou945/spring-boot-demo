@@ -41,7 +41,7 @@ public class DepartmentRepositoryTest extends DBTestCase {
     @Test
     public void testFindByParentDepartmentIdIn() {
         List<Long> parameter = Lists.newArrayList(-222L, -333L);
-        List<Long> list = departmentRepository.findByParentDepartmentIdIn(parameter);
+        List<Department> list = departmentRepository.findByParentDepartmentIdIn(parameter);
         Assert.assertTrue(list.isEmpty());
         logger.debug("testFindByParentDepartmentIdIn , parameter is {}, result is {}", parameter, list);
     }

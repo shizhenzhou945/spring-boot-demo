@@ -1,10 +1,9 @@
-package com.github.wenslo.springbootdemo.service;
+package com.github.wenslo.springbootdemo.service.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.condition.system.RoleCondition;
 import com.github.wenslo.springbootdemo.model.system.Role;
-import com.github.wenslo.springbootdemo.service.system.RoleService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
