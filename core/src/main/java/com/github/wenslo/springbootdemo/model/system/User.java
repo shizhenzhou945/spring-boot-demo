@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString(exclude = "organizations")
 @Entity
+@Table(name = "user", indexes = {@Index(name = "username_index", columnList = "username")})
 @NamedEntityGraph(name = "user.organizations",
         attributeNodes = @NamedAttributeNode(value = "organizations"))
 public class User extends LongIdEntity implements UserDetails {
