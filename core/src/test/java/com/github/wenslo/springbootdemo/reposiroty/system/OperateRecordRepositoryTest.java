@@ -22,7 +22,7 @@ public class OperateRecordRepositoryTest extends MongoTestCase {
     @Test
     public void testFindByDistrictCode() {
         List<OperateRecord> organizations = operateRecordRepository.findAll();
-        logger.debug(" result is {}", organizations);
+        logger.debug(" result is {}", gson.toJson(organizations));
     }
 
 }

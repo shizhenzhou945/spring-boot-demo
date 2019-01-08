@@ -3,7 +3,9 @@ package com.github.wenslo.springbootdemo.model.system;
 import com.github.wenslo.springbootdemo.enums.common.OperateRecordType;
 import com.github.wenslo.springbootdemo.observer.event.Event;
 import com.querydsl.core.annotations.QueryEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,6 +19,8 @@ import java.io.Serializable;
  */
 @QueryEntity
 @Document
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class OperateRecord<T> implements Event, Serializable {
     @Id
@@ -26,4 +30,10 @@ public class OperateRecord<T> implements Event, Serializable {
     /** 操作数据 **/
     private T record;
     private OperateRecordType operateRecordType;
+
+    public OperateRecord(User user, T record, OperateRecordType operateRecordType) {
+        this.user = user;
+        this.record = record;
+        this.operateRecordType = operateRecordType;
+    }
 }
