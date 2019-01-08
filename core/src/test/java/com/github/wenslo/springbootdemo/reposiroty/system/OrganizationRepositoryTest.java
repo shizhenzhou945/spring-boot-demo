@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.enums.common.DeleteFlag;
 import com.github.wenslo.springbootdemo.model.system.Organization;
 import com.google.common.collect.Lists;
@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
-public class OrganizationRepositoryTest extends BaseTestCase {
+public class OrganizationRepositoryTest extends DBTestCase {
 
     @Autowired
     private OrganizationRepository organizationRepository;

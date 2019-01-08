@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.model.system.QUser;
 import com.github.wenslo.springbootdemo.model.system.User;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -19,7 +19,7 @@ import java.util.Optional;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
-public class UserRepositoryTest extends BaseTestCase {
+public class UserRepositoryTest extends DBTestCase {
 
     @Autowired
     private UserRepository userRepository;

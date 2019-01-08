@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.condition.system.RoleCondition;
 import com.github.wenslo.springbootdemo.model.system.Role;
 import com.github.wenslo.springbootdemo.service.system.RoleService;
@@ -18,7 +18,7 @@ import java.util.List;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
-public class RoleServiceTest extends BaseTestCase {
+public class RoleServiceTest extends DBTestCase {
     @Autowired
     private RoleService roleService;
 

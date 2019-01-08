@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.administration;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.model.administration.Department;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
@@ -17,7 +17,7 @@ import java.util.List;
  * @description 部门
  */
 @DatabaseSetup(value = "/dataset.xml")
-public class DepartmentRepositoryTest extends BaseTestCase {
+public class DepartmentRepositoryTest extends DBTestCase {
 
     @Autowired
     private DepartmentRepository departmentRepository;

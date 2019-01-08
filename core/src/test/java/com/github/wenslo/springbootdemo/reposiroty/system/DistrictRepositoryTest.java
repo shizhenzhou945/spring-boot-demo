@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.reposiroty.system;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.model.system.District;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @DatabaseSetup(value = "/dataset.xml")
-public class DistrictRepositoryTest extends BaseTestCase {
+public class DistrictRepositoryTest extends DBTestCase {
 
     @Autowired
     private DistrictRepository districtRepository;

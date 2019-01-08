@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableWebMvc
 @EnableWebSecurity
-@Import({JpaConfig.class})
+@Import({CommonConfig.class, MongoConfig.class, JpaConfig.class})
 public class SpringBootDemoApplication {
 
     public static void main(String[] args) {

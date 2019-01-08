@@ -1,7 +1,7 @@
 package com.github.wenslo.springbootdemo.service;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.wenslo.springbootdemo.BaseTestCase;
+import com.github.wenslo.springbootdemo.DBTestCase;
 import com.github.wenslo.springbootdemo.condition.system.UserCondition;
 import com.github.wenslo.springbootdemo.domain.Pageable;
 import com.github.wenslo.springbootdemo.model.system.User;
@@ -20,7 +20,7 @@ import java.util.Objects;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
-public class UserServiceTest extends BaseTestCase {
+public class UserServiceTest extends DBTestCase {
 
     @Autowired
     private UserService userService;

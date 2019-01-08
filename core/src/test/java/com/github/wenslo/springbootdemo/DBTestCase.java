@@ -25,17 +25,17 @@ import java.io.Reader;
 /**
  * @author wenhailin
  * @version 0.0.1
- * @createTime 2018年11月25日 下午12:45
- * @description 基础测试基类
+ * @createTime 2019-01-07 17:45
+ * @description
  */
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = JpaConfig.class)
 @ActiveProfiles("test")
-public abstract class BaseTestCase extends DataSourceBasedDBTestCase {
+@SpringBootTest(classes = {JpaConfig.class, CommonConfig.class})
+public abstract class DBTestCase extends DataSourceBasedDBTestCase {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     protected Gson gson;
