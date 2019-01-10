@@ -33,13 +33,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         if (Objects.equals(MediaType.APPLICATION_JSON_VALUE, request.getContentType())
                 || Objects.equals(MediaType.APPLICATION_JSON_UTF8_VALUE, request.getContentType())) {
             ObjectMapper mapper = new ObjectMapper();
-            UsernamePasswordAuthenticationToken authRequest = null;
+            UsernamePasswordAuthenticationToken authRequest;
             try (InputStream is = request.getInputStream()) {
                 AuthenticationBean authenticationBean = mapper.readValue(is, AuthenticationBean.class);
                 authRequest = new UsernamePasswordAuthenticationToken(
                         authenticationBean.getUsername(), authenticationBean.getPassword());
             } catch (IOException e) {
-                logger.error("obtainUsername is error", e);
+                logger.error("obtain username is error", e);
                 authRequest = new UsernamePasswordAuthenticationToken(
                         "", "");
             }
