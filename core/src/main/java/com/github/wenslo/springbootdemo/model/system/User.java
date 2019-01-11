@@ -29,7 +29,8 @@ import java.util.stream.Collectors;
 @Setter
 @ToString(exclude = "organizations")
 @Entity
-@Table(name = "user", indexes = {@Index(name = "username_index", columnList = "username")})
+@Table(name = "user", indexes = {@Index(name = "username_index", columnList = "username")},
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @NamedEntityGraph(name = "user.organizations",
         attributeNodes = @NamedAttributeNode(value = "organizations"))
 public class User extends LongIdEntity implements UserDetails {
@@ -48,7 +49,7 @@ public class User extends LongIdEntity implements UserDetails {
     private List<Permission> permission;
     /** 角色 **/
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id"),}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roles;
     /** 账户是否过期 **/
     @Column(name = "account_non_expired")

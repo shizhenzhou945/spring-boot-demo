@@ -66,7 +66,7 @@ public class UserRepositoryTest extends DBTestCase {
     public void testSave() {
         User user = new User();
         user.setUsername("Warren wen");
-        user.setPassword("111111");
+        user.setPassword("1234");
         User result = userRepository.save(user);
         logger.debug("test save parameter is {} , result is {}", user, result);
     }

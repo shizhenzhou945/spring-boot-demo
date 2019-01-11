@@ -1,16 +1,8 @@
 package com.github.wenslo.springbootdemo;
 
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author wenhailin
@@ -28,28 +20,33 @@ public class Test {
 //        List<Permission> list = Lists.newArrayList(permission, permission1, permission2, permission3);
 //        System.out.println(gson.toJson(list));
 
-        List<Arr> list = Lists.newArrayList(new Arr("abc", 1, "dadssa"),
-                new Arr("abcd", 1, "dadssa"),
-                new Arr("abc", 2, "dadssa"),
-                new Arr("abcsdasa", 1, "dadssa")
-        );
-
-        Map<String, List<Arr>> collect = list.stream().collect(Collectors.groupingBy(Arr::getA));
-        collect.forEach((key, value) -> {
-            Arr arr = value.stream().max(Comparator.comparing(Arr::getB)).get();
-            System.out.println(" a is " + key + ", max b is " + arr.getB() + ", c is " + arr.getC());
-        });
-
+//        List<Arr> list = Lists.newArrayList(new Arr("abc", 1, "dadssa"),
+//                new Arr("abcd", 1, "dadssa"),
+//                new Arr("abc", 2, "dadssa"),
+//                new Arr("abcsdasa", 1, "dadssa")
+//        );
+//
+//        Map<String, List<Arr>> collect = list.stream().collect(Collectors.groupingBy(Arr::getA));
+//        collect.forEach((key, value) -> {
+//            Arr arr = value.stream().max(Comparator.comparing(Arr::getB)).get();
+//            System.out.println(" a is " + key + ", max b is " + arr.getB() + ", c is " + arr.getC());
+//        });
+        String msg = "'2123123123'是一个数字";
+        String betweenString = StringUtils.substringBetween(msg, "'", "'");
+        final String pattern = "{}";
+        final String notExist = "{}已经存在，请检查后重新录入！";
+        String result = StringUtils.replace(notExist, pattern, betweenString);
+        System.out.println(result);
     }
 
 
 }
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class Arr {
-    public String a;
-    public Integer b;
-    public String c;
-}
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//class Arr {
+//    public String a;
+//    public Integer b;
+//    public String c;
+//}
