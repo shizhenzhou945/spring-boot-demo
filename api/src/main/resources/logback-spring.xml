@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
     <include resource="secret.xml"/>
-
-
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework" level="WARN"/>
     <logger name="com.zaxxer" level="INFO"/>
-    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.hibernate" level="WARN"/>
     <logger name="org.mongodb" level="INFO"/>
-
+    <logger name="org.apache" level="WARN"/>
+    <logger name="com.aliyun.openservices" level="WARN"/>
     <!-- product -->
     <springProfile name="pro">
         <root level="DEBUG">
@@ -25,7 +25,6 @@
     <springProfile name="dev">
         <root level="DEBUG">
             <appender-ref ref="STDOUT"/>
-            <appender-ref ref="loghubAppender"/>
         </root>
     </springProfile>
 
@@ -33,7 +32,7 @@
     <springProfile name="test">
         <root level="DEBUG">
             <appender-ref ref="STDOUT"/>
-            <appender-ref ref="loghubAppender"/>
+            <appender-ref ref="aliLogAppender"/>
         </root>
     </springProfile>
 </configuration>

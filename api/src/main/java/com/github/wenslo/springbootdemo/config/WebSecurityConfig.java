@@ -71,4 +71,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationManager(authenticationManagerBean());
         return filter;
     }
+
 }
