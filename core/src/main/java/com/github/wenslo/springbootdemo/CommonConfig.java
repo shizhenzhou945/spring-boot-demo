@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * @author wenhailin
@@ -25,6 +26,11 @@ public class CommonConfig {
     @Bean
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         return new ThreadPoolTaskExecutor();
+    }
+
+    @Bean
+    public WebClient getWebClient() {
+        return WebClient.builder().build();
     }
 
     @Autowired
