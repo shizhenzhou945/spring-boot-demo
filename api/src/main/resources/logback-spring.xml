@@ -32,7 +32,7 @@
     <springProfile name="test">
         <root level="DEBUG">
             <appender-ref ref="STDOUT"/>
-            <appender-ref ref="aliLogAppender"/>
+            <!--<appender-ref ref="aliLogAppender"/>-->
         </root>
     </springProfile>
 </configuration>
