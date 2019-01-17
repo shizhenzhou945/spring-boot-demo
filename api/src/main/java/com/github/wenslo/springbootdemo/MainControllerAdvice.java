@@ -44,6 +44,7 @@ public class MainControllerAdvice {
             String result = StringUtils.replace(notExistString, pattern, betweenString);
             return Response.error(result);
         }
+        logger.error("Catching exception ", t);
         return Response.SUCCESS;
     }
 }
