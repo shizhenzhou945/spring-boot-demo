@@ -44,7 +44,7 @@ public class Organization extends LongIdEntity {
     private Long headquartersId;
     @Enumerated(EnumType.STRING)
     private DeleteFlag deleteFlag;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Transient
     private List<User> users;
 
     @PreRemove
