@@ -45,6 +45,6 @@ public class MainControllerAdvice {
             return Response.error(result);
         }
         logger.error("Catching exception ", t);
-        return Response.SUCCESS;
+        return Response.error(t.getMessage());
     }
 }
