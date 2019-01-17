@@ -7,13 +7,6 @@
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-
-    <logger name="org.springframework" level="WARN"/>
-    <logger name="com.zaxxer" level="INFO"/>
-    <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.mongodb" level="INFO"/>
-    <logger name="org.apache" level="WARN"/>
-    <logger name="com.aliyun.openservices" level="WARN"/>
     <!-- product -->
     <springProfile name="pro">
         <root level="DEBUG">

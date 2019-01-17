@@ -18,3 +18,9 @@ logging:
     com.github.wenslo: debug
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql: trace
+    org.springframework: warn
+    com.zaxxer: info
+    org.hibernate: warn
+    org.mongodb: warn
+    org.apache: warn
+    com.aliyun.openservices: warn
