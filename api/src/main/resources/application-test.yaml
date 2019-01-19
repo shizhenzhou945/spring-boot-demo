@@ -23,3 +23,8 @@ logging:
     org.mongodb: warn
     org.apache: warn
     com.aliyun.openservices: warn
+server:
+  servlet:
+    session:
+      cookie:
+        max-age: 30m
