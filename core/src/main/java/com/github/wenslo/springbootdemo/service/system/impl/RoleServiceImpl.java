@@ -28,9 +28,9 @@ public class RoleServiceImpl extends LongIdServiceImpl<Role, RoleCondition> impl
         List<Predicate> conditionBuilder = super.conditionBuild(condition);
         BooleanBuilder builder = new BooleanBuilder();
         QRole role = QRole.role;
-        String roleName = condition.getRoleName();
+        String roleName = condition.getName();
         if (StringUtils.isNotBlank(roleName)) {
-            builder.and(role.roleName.startsWith(roleName));
+            builder.and(role.name.startsWith(roleName));
         }
         conditionBuilder.add(builder);
         return conditionBuilder;

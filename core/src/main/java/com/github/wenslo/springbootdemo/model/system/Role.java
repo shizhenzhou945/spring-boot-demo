@@ -24,8 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Role extends OrganizationBasicEntity {
-    @Column(name = "role_name")
-    private String roleName;
+    private String name;
     @Column(name = "permission", length = 1024)
     @Convert(converter = PermissionConverter.class)
     private List<Permission> permission;

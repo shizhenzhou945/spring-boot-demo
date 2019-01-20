@@ -1,5 +1,6 @@
 package com.github.wenslo.springbootdemo.model.base;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,8 +27,11 @@ public abstract class LongIdEntity {
 
     @CreatedDate
     @Column(name = "updated_at")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected LocalDateTime createdAt;
+
     @LastModifiedDate
     @Column(name = "created_at")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected LocalDateTime updatedAt;
 }

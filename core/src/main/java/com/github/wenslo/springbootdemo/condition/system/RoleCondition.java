@@ -9,20 +9,20 @@ import com.github.wenslo.springbootdemo.condition.base.PageCondition;
  * @description
  */
 public class RoleCondition extends PageCondition {
-    private String roleName;
+    private String name;
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "RoleCondition{" +
-                "roleName='" + roleName + '\'' +
+                "name='" + name + '\'' +
                 ", id=" + id +
                 ", pageable=" + pageable +
                 '}';

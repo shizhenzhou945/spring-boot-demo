@@ -3,6 +3,7 @@ package com.github.wenslo.springbootdemo.reposiroty.system;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.MongoTestCase;
 import com.github.wenslo.springbootdemo.model.system.OperateRecord;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
+@Ignore
 public class OperateRecordRepositoryTest extends MongoTestCase {
     @Autowired
     private OperateRecordRepository operateRecordRepository;
