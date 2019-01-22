@@ -13,11 +13,10 @@ import java.util.Optional;
  * @description 自定义分页
  */
 public class Pageable implements org.springframework.data.domain.Pageable, Serializable {
-    private boolean paged;
-    private boolean unpaged;
+    private boolean paged = true;
+    private boolean unpaged = false;
     private Integer page;
     private Integer size;
-    private Integer offset;
     private Sort sort;
     private Sort sortOr;
 
@@ -44,7 +43,7 @@ public class Pageable implements org.springframework.data.domain.Pageable, Seria
 
     @Override
     public long getOffset() {
-        return Objects.isNull(offset) ? 0 : offset;
+        return (long) page * (long) size;
     }
 
     @Override
@@ -58,6 +57,11 @@ public class Pageable implements org.springframework.data.domain.Pageable, Seria
     }
 
     public Pageable() {
+    }
+
+    public Pageable(Integer page, Integer size) {
+        this.page = page;
+        this.size = size;
     }
 
     public Pageable(Integer page, Integer size, Sort sort) {
@@ -87,11 +91,50 @@ public class Pageable implements org.springframework.data.domain.Pageable, Seria
 
     @Override
     public boolean hasPrevious() {
-        return false;
+        return page > 0;
     }
 
     @Override
     public Optional<org.springframework.data.domain.Pageable> toOptional() {
         return isUnpaged() ? Optional.empty() : Optional.of(this);
     }
+
+    public void setPaged(boolean paged) {
+        this.paged = paged;
+    }
+
+    public void setUnpaged(boolean unpaged) {
+        this.unpaged = unpaged;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+
+    public void setSort(Sort sort) {
+        this.sort = sort;
+    }
+
+    public Sort getSortOr() {
+        return sortOr;
+    }
+
+    public void setSortOr(Sort sortOr) {
+        this.sortOr = sortOr;
+    }
+
+
 }

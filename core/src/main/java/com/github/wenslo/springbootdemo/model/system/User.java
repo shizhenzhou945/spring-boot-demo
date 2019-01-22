@@ -2,6 +2,7 @@ package com.github.wenslo.springbootdemo.model.system;
 
 import com.github.wenslo.springbootdemo.convert.PermissionConverter;
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,10 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -74,6 +72,9 @@ public class User extends LongIdEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<String> authorities = Sets.newHashSet();
+        if (Objects.isNull(permission)) {
+            return Lists.newArrayList();
+        }
         if (!permission.isEmpty()) {
             authorities.addAll(getPermissionCollect(this.permission));
         }
