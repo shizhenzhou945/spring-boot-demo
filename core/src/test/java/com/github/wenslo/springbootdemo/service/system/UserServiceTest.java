@@ -29,7 +29,6 @@ public class UserServiceTest extends DBTestCase {
         UserCondition condition = new UserCondition();
         condition.setUsername("user2");
         Pageable pageable = new Pageable();
-        pageable.setPage(20);
         Page<User> page = userService.getByCondition(condition, pageable);
         logger.debug("page data is {}", page);
         Assert.assertTrue(!page.isEmpty());

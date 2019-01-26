@@ -43,7 +43,7 @@ public class Pageable implements org.springframework.data.domain.Pageable, Seria
 
     @Override
     public long getOffset() {
-        return (long) page * (long) size;
+        return (long) getPageNumber() * (long) getPageSize();
     }
 
     @Override
