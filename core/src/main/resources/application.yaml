@@ -13,6 +13,11 @@ spring:
         show_sql: false
         use_sql_comments: false
         format_sql: false
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: database
 logging:
   level:
     com.github.wenslo: debug

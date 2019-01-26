@@ -14,13 +14,17 @@ spring:
         show_sql: false
         use_sql_comments: true
         format_sql: false
+  data:
+    mongodb:
+      host: 127.0.0.1
+      database: database
 logging:
   level:
     com.github.wenslo: debug
     org.springframework: warn
     com.zaxxer: info
     org.hibernate: warn
-    org.mongodb: warn
+    org.mongodb: info
     org.apache: warn
     com.aliyun.openservices: warn
 server:
