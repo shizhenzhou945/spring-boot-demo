@@ -36,6 +36,7 @@ public class UserController extends BaseController {
 
     @RequestMapping("/queryAll")
     public Response getAll() {
+        logger.debug("The current thread id is {} ", Thread.currentThread().getId());
         return Response.success(userService.getAll());
     }
 

@@ -8,6 +8,8 @@ import com.github.wenslo.springbootdemo.service.base.impl.OrganizationBasicServi
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,7 +22,9 @@ import java.util.stream.Collectors;
  * @description 部门
  */
 @Service
-@Transactional
+@Transactional(
+        isolation = Isolation.SERIALIZABLE,
+        propagation = Propagation.MANDATORY)
 public class DepartmentServiceImpl extends OrganizationBasicServiceImpl<Department, DepartmentCondition> implements DepartmentService {
 
     @Autowired
