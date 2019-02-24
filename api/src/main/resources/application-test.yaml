@@ -27,6 +27,7 @@ logging:
     org.mongodb: info
     org.apache: warn
     com.aliyun.openservices: warn
+    org.jxls: warn
 server:
   servlet:
     session:

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -63,15 +63,19 @@ public class UserController extends BaseController {
         response.reset();
         Map<String, Object> map = Maps.newHashMap();
         map.put("users", users);
-//        ServletOutputStream outputStream = response.getOutputStream();
-        try (OutputStream outputStream = new FileOutputStream("/Users/wen/github/spring-boot-demo/api/src/main/resources/template/user2.xls")) {
-            excelUtil.export("/Users/wen/github/spring-boot-demo/api/src/main/resources/template/user.xls", map, outputStream);
-            response.setHeader("content-type", "application/octet-stream");
-            response.setContentType("application.octet-stream");
-            response.setHeader("Content-Disposition", "attachment;filename=user.xls");
+        String exportFile = excelUtil.export("/template/user.xls", map);
+        response.setHeader("content-type", "application/octet-stream");
+        response.setContentType("application.octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=" + new String("用户数据".getBytes(), "ISO8859_1") + ".xls");
+        OutputStream outputStream = response.getOutputStream();
+        try (FileInputStream fileInputStream = new FileInputStream(exportFile)) {
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = fileInputStream.read(bytes)) > 0) {
+                outputStream.write(bytes, 0, length);
+            }
+            outputStream.flush();
+            outputStream.close();
         }
-
-//        outputStream.flush();
-//        outputStream.close();
     }
 }
