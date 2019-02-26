@@ -3,6 +3,7 @@ package com.github.wenslo.springbootdemo.service.administration;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.wenslo.springbootdemo.DBTestCase;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @description
  */
 @DatabaseSetup(value = "/dataset.xml")
+@Ignore
 public class DepartmentServiceTest extends DBTestCase {
     @Autowired
     private DepartmentService departmentService;
