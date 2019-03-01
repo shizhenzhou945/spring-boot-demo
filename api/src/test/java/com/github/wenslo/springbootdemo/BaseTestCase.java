@@ -1,20 +1,17 @@
 package com.github.wenslo.springbootdemo;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
 
@@ -31,8 +28,6 @@ public abstract class BaseTestCase {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private WebApplicationContext context;
-    @Rule
-    public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
     protected MockMvc mvc;
 
@@ -41,7 +36,6 @@ public abstract class BaseTestCase {
         this.mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity())
-                .apply(documentationConfiguration(this.restDocumentation))
                 .build();
     }
 

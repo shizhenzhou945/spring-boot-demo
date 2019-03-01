@@ -9,28 +9,8 @@ plugins {
 dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
-
-    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.3.RELEASE'
-    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.3.RELEASE'
     compile project(":core")
 }
-ext {
-    snippetsDir = file("build/generated-snippets")
-}
-
-test {
-    outputs.dir snippetsDir
-}
-
-asciidoctor {
-    inputs.dir snippetsDir
-    dependsOn test
-    sourceDir "build/generated-snippets"
-    outputDir "${buildDir}/docs"
-}
-
-build.dependsOn asciidoctor
-
 
 dependencyManagement {
     imports {
