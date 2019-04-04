@@ -11,6 +11,8 @@ import com.github.wenslo.springbootdemo.annotation.permission.PermissionGroup;
  */
 @PermissionGroup
 public class SystemPermission {
+    //-------------------------超级管理员权限------------------------------
+    public static final String ADMINISTRATOR = "ADMINISTRATOR";
     //-------------------------用户相关权限------------------------------
     private static final String USER_PERMISSION = "用户权限";
 

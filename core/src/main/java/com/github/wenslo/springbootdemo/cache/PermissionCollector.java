@@ -4,6 +4,7 @@ import com.github.wenslo.springbootdemo.annotation.eventbus.Observer;
 import com.github.wenslo.springbootdemo.annotation.permission.PermissionGroup;
 import com.github.wenslo.springbootdemo.model.system.Permission;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,7 +26,8 @@ import java.util.stream.Collectors;
 @Component
 public class PermissionCollector implements BeanPostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(PermissionCollector.class);
-    public static final Map<String, List<Permission>> permission = Maps.newHashMap();
+    public static final Map<String, List<Permission>> permissionMap = Maps.newHashMap();
+    public static final Set<String> permissionSet = Sets.newHashSet();
     @Autowired
     private EventBus eventBus;
 
@@ -55,19 +54,20 @@ public class PermissionCollector implements BeanPostProcessor {
 
     private void putPermissionIfPresent(Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
-
         Map<String, List<Permission>> map = Arrays.stream(fields)
                 .filter(s -> Objects.nonNull(s.getAnnotation(com.github.wenslo.springbootdemo.annotation.permission.Permission.class)))
                 .map(s -> {
                     com.github.wenslo.springbootdemo.annotation.permission.Permission annotation = s.getAnnotation(com.github.wenslo.springbootdemo.annotation.permission.Permission.class);
                     try {
-                        logger.trace("get name is {}", s.get(clazz));
-                        return new Permission(annotation.value(), (String) s.get(clazz), annotation.group());
+                        String name = (String) s.get(clazz);
+                        logger.trace("get name is {}", name);
+                        permissionSet.add(name);
+                        return new Permission(annotation.value(), name, annotation.group());
                     } catch (IllegalAccessException e) {
-                        logger.error("convert permission label is error", e);
+                        logger.error("convert permissionMap label is error", e);
                         return null;
                     }
                 }).collect(Collectors.toList()).stream().collect(Collectors.groupingBy(Permission::getGroup));
-        permission.putAll(map);
+        permissionMap.putAll(map);
     }
 }

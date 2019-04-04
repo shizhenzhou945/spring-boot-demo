@@ -3,12 +3,19 @@ package com.github.wenslo.springbootdemo.config;
 import com.github.wenslo.springbootdemo.security.filter.CustomAuthenticationFilter;
 import com.github.wenslo.springbootdemo.security.provider.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.cors.CorsUtils;
 
 /**
@@ -62,6 +69,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(mainAuthenticationEntryPoint)
                 .accessDeniedHandler(mainAccessDeniedHandler)
+                .and()
+                .sessionManagement()
+                .maximumSessions(3)
+                .sessionRegistry(sessionRegistry())
 
         ;
         http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -75,5 +86,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setFilterProcessesUrl("/login");
         filter.setAuthenticationManager(authenticationManagerBean());
         return filter;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SessionAuthenticationStrategy mainSessionAuthenticationStrategy() {
+        return new RegisterSessionAuthenticationStrategy(sessionRegistry());
+    }
+
+    @Bean
+
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<HttpSessionEventPublisher> servletListenerRegistrationBean() {
+        return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
     }
 }
