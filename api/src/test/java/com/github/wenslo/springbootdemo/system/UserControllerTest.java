@@ -1,6 +1,7 @@
 package com.github.wenslo.springbootdemo.system;
 
 import com.github.wenslo.springbootdemo.BaseTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @createTime 2019-02-25 15:09
  * @description
  */
+@Ignore
 public class UserControllerTest extends BaseTestCase {
     @WithMockUser("user1")
     @Test

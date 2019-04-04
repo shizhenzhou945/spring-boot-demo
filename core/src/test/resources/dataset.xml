@@ -2,19 +2,18 @@
 <dataset>
     <!-- user -->
     <user id="-1" username="user1" password="1234"
-          permission='[{"value":"USER_ADD","label":"用户添加","enabled":true,"group":"用户相关权限"},{"value":"USER_VIEW","label":"用户查看","enabled":true,"group":"用户相关权限"},{"value":"USER_DELETE","label":"用户删除","enabled":true,"group":"用户相关权限"},{"value":"USER_UPDATE","label":"用户修改","enabled":true,"group":"用户相关权限"}]'
           created_at="2018-11-25 07:15:07"
           updated_at="2018-11-25 07:15:16" account_non_expired="0" account_non_locked="0" credentials_non_expired="0"
           enabled="0"/>
 
     <user id="-2" username="user2" password="1234" created_at="2018-11-25 07:15:07"
-          permission='[{"value":"USER_VIEW","label":"用户查看","enabled":true}]'
           updated_at="2018-11-25 07:15:16" account_non_expired="0" account_non_locked="0" credentials_non_expired="0"
           enabled="0"/>
 
     <!-- role -->
     <role id="-1" created_at="2018-11-25 07:15:07" updated_at="2018-11-25 07:15:16" name="user manager"
-          permission='[{"value":"USER_ADD","label":"用户添加","enabled":true,"group":"用户相关权限"},{"value":"USER_VIEW","label":"用户查看","enabled":true,"group":"用户相关权限"},{"value":"USER_DELETE","label":"用户删除","enabled":true,"group":"用户相关权限"},{"value":"USER_UPDATE","label":"用户修改","enabled":true,"group":"用户相关权限"}]'/>
+          permission="ADMINISTRATOR"
+          description="这就是个测试角色" enabled="1"/>
     <!-- user_role -->
     <user_role user_id="-1" role_id="-1"/>
     <!-- organization -->

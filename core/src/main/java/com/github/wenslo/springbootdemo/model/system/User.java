@@ -1,7 +1,9 @@
 package com.github.wenslo.springbootdemo.model.system;
 
-import com.github.wenslo.springbootdemo.convert.PermissionConverter;
+import com.github.wenslo.springbootdemo.cache.PermissionCollector;
+import com.github.wenslo.springbootdemo.convert.StringListConverter;
 import com.github.wenslo.springbootdemo.model.base.LongIdEntity;
+import com.github.wenslo.springbootdemo.permission.SystemPermission;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.*;
@@ -11,7 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -43,8 +48,8 @@ public class User extends LongIdEntity implements UserDetails {
     private String password;
     /** 权限 **/
     @Column(name = "permission", length = 1024)
-    @Convert(converter = PermissionConverter.class)
-    private List<Permission> permission;
+    @Convert(converter = StringListConverter.class)
+    private List<String> permission;
     /** 角色 **/
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id"),}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
@@ -66,8 +71,6 @@ public class User extends LongIdEntity implements UserDetails {
     @JoinTable(name = "user_organization", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "organization_id")})
     private List<Organization> organizations;
 
-    @Transient
-    private Map<String, List<Permission>> permissionMap;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -76,26 +79,19 @@ public class User extends LongIdEntity implements UserDetails {
             return Lists.newArrayList();
         }
         if (!permission.isEmpty()) {
-            authorities.addAll(getPermissionCollect(this.permission));
+            authorities.addAll(this.permission);
         }
         if (!roles.isEmpty()) {
             roles.forEach(it -> {
-                List<Permission> rolePermissions = it.getPermission();
+                List<String> rolePermissions = it.getPermission();
                 if (!rolePermissions.isEmpty()) {
-                    authorities.addAll(getPermissionCollect(rolePermissions));
+                    boolean match = rolePermissions.stream().anyMatch(flag -> Objects.equals(flag, SystemPermission.ADMINISTRATOR));
+                    if (match) authorities.addAll(PermissionCollector.permissionSet);
+                    authorities.addAll(rolePermissions);
                 }
             });
         }
         return authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
-
-    /**
-     * collect permission
-     * @param permissions permissions
-     * @return permission str on set
-     */
-    private Set<String> getPermissionCollect(List<Permission> permissions) {
-        return permissions.stream().filter(Permission::isEnabled).map(Permission::getValue).collect(Collectors.toSet());
     }
 
 }
