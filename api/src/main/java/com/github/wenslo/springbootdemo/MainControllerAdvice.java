@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class MainControllerAdvice {
     /**
      * 异常处理
      */
-    @ExceptionHandler(value = {Throwable.class})
+    @ExceptionHandler(value = {ConstraintViolationException.class, DataIntegrityViolationException.class, SQLException.class})
     public Response constraintViolationExceptionHandler(Throwable t) {
         if (t instanceof ConstraintViolationException) {
             ConstraintViolationException ex = (ConstraintViolationException) t;
@@ -37,14 +38,31 @@ public class MainControllerAdvice {
         }
         if (t instanceof DataIntegrityViolationException) {
             DataIntegrityViolationException dataIntegrityViolationException = (DataIntegrityViolationException) t;
-            String msg = dataIntegrityViolationException.getMessage();
-            String betweenString = StringUtils.substringBetween(msg, "'", "'");
-            final String pattern = "{}";
-            final String notExistString = "{}已经存在，请检查后重新录入！";
-            String result = StringUtils.replace(notExistString, pattern, betweenString);
-            return Response.error(result);
+            String msg = getErrorMsg(dataIntegrityViolationException);
+            return populateUniqueErrorTip(msg);
+        }
+        if (t instanceof SQLException) {
+            SQLException jdbcSQLException = (SQLException) t;
+            if ("FOREIGN KEY".contains(jdbcSQLException.getMessage())) {
+                return Response.error("绑定数据存在，无法进行删除或修改");
+            }
         }
         logger.error("Catching exception ", t);
         return Response.error(t.getMessage());
+    }
+
+    private Response populateUniqueErrorTip(String msg) {
+        String betweenString = StringUtils.substringBetween(msg, "'", "'");
+        final String pattern = "{}";
+        final String notExistString = "{}已经存在，请检查后重新录入！";
+        String result = StringUtils.replace(notExistString, pattern, betweenString);
+        return Response.error(result);
+    }
+
+    private String getErrorMsg(Throwable throwable) {
+        if (throwable.getCause() != null) {
+            return getErrorMsg(throwable.getCause());
+        }
+        return throwable.getMessage();
     }
 }

@@ -11,9 +11,3 @@ dependencies {
     testCompile('org.springframework.security:spring-security-test')
     compile project(":core")
 }
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
